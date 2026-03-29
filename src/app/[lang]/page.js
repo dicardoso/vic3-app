@@ -10,8 +10,13 @@ import AchievementCard from '@/components/AchievementCard';
 import AchievementModal from '@/components/AchievementModal';
 import GuideCard from '@/components/GuideCard';
 import GuideModal from '@/components/GuideModal';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useDictionary } from '@/components/DictionaryContext';
+import { getDifficultyKey } from '@/utils/helpers';
 
 export default function Vic3AchievementTracker() {
+    const { dict, lang } = useDictionary();
+
     // --- TABS ---
     const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides'
 
@@ -71,9 +76,16 @@ export default function Vic3AchievementTracker() {
         });
     };
 
-    const difficulties = ['All', 'Fácil', 'Médio', 'Difícil', 'Muito Difícil'];
+    // Internal difficulty keys used in data
+    const difficultyKeys = ['Fácil', 'Médio', 'Difícil', 'Muito Difícil'];
     const countries = ['All', ...new Set(initialAchievements.map(a => a.country))].sort();
     const types = ['All', ...new Set(initialAchievements.map(a => a.objectiveType))].sort();
+
+    // Translate difficulty from internal key to display label
+    function translateDifficulty(internalValue) {
+        const key = getDifficultyKey(internalValue);
+        return key ? (dict.difficulties[key] || internalValue) : internalValue;
+    }
 
     const filteredAchievements = useMemo(() => {
         return achievements.filter(ach => {
@@ -89,19 +101,19 @@ export default function Vic3AchievementTracker() {
     }, [achievements, searchTerm, filterDifficulty, filterCountry, filterType, hideCompleted]);
 
     const groupedAchievements = useMemo(() => {
-        if (groupBy === 'none') return { 'Todas as Conquistas': filteredAchievements };
+        if (groupBy === 'none') return { [dict.achievements.allAchievements]: filteredAchievements };
 
         return filteredAchievements.reduce((acc, ach) => {
-            let key = 'Outros';
+            let key = dict.achievements.others;
             if (groupBy === 'country') key = ach.country;
-            if (groupBy === 'difficulty') key = ach.difficulty;
+            if (groupBy === 'difficulty') key = translateDifficulty(ach.difficulty);
             if (groupBy === 'type') key = ach.objectiveType;
 
             if (!acc[key]) acc[key] = [];
             acc[key].push(ach);
             return acc;
         }, {});
-    }, [filteredAchievements, groupBy]);
+    }, [filteredAchievements, groupBy, dict]);
 
     const completedCount = achievements.filter(a => a.completed).length;
     const totalCount = achievements.length;
@@ -116,23 +128,26 @@ export default function Vic3AchievementTracker() {
                             <Globe className="w-8 h-8 text-amber-500" />
                             <div>
                                 <h1 className="text-2xl font-bold text-white tracking-tight">Victoria 3</h1>
-                                <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">Guia e Rastreador</p>
+                                <p className="text-xs text-slate-400 uppercase tracking-widest font-semibold">{dict.header.subtitle}</p>
                             </div>
                         </div>
 
-                        {isMounted && activeTab === 'achievements' && (
-                             <div className="flex flex-col items-end">
-                                 <span className="text-sm font-medium text-slate-300 mb-1">
-                                    Progresso Geral: {completedCount} / {totalCount} ({progressPercent}%)
-                                 </span>
-                                 <div className="w-full md:w-64 bg-slate-800 rounded-full h-2.5 overflow-hidden">
-                                    <div
-                                        className="bg-amber-500 h-2.5 rounded-full transition-all duration-500 ease-in-out"
-                                        style={{ width: `${progressPercent}%` }}
-                                    ></div>
+                        <div className="flex items-center gap-4">
+                            {isMounted && activeTab === 'achievements' && (
+                                 <div className="flex flex-col items-end">
+                                     <span className="text-sm font-medium text-slate-300 mb-1">
+                                        {dict.header.progress}: {completedCount} / {totalCount} ({progressPercent}%)
+                                     </span>
+                                     <div className="w-full md:w-64 bg-slate-800 rounded-full h-2.5 overflow-hidden">
+                                        <div
+                                            className="bg-amber-500 h-2.5 rounded-full transition-all duration-500 ease-in-out"
+                                            style={{ width: `${progressPercent}%` }}
+                                        ></div>
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                            <LanguageSwitcher />
+                        </div>
                     </div>
 
                     <div className="flex space-x-8 mt-6">
@@ -144,7 +159,7 @@ export default function Vic3AchievementTracker() {
                             : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
                         }`}
                         >
-                        <div className="flex items-center gap-2"><Trophy className="w-4 h-4" /> Lista de Conquistas</div>
+                        <div className="flex items-center gap-2"><Trophy className="w-4 h-4" /> {dict.header.tabs.achievements}</div>
                         </button>
                         <button 
                         onClick={() => setActiveTab('guides')}
@@ -154,7 +169,7 @@ export default function Vic3AchievementTracker() {
                             : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
                         }`}
                         >
-                        <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guias de Países Principais</div>
+                        <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {dict.header.tabs.guides}</div>
                         </button>
                     </div>
                 </div>
@@ -170,7 +185,7 @@ export default function Vic3AchievementTracker() {
                                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                                     <input
                                         type="text"
-                                        placeholder="Buscar conquista, país ou condição..."
+                                        placeholder={dict.filters.searchPlaceholder}
                                         className="w-full bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block pl-10 p-2.5 placeholder-slate-500 shadow-inner"
                                         value={searchTerm}
                                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -183,10 +198,10 @@ export default function Vic3AchievementTracker() {
                                         value={groupBy}
                                         onChange={(e) => setGroupBy(e.target.value)}
                                     >
-                                        <option value="none">Sem Agrupamento</option>
-                                        <option value="country">Agrupar por País</option>
-                                        <option value="difficulty">Agrupar por Dificuldade</option>
-                                        <option value="type">Agrupar por Tipo</option>
+                                        <option value="none">{dict.filters.noGrouping}</option>
+                                        <option value="country">{dict.filters.groupByCountry}</option>
+                                        <option value="difficulty">{dict.filters.groupByDifficulty}</option>
+                                        <option value="type">{dict.filters.groupByType}</option>
                                     </select>
                                 </div>
 
@@ -196,7 +211,7 @@ export default function Vic3AchievementTracker() {
                                         value={filterCountry}
                                         onChange={(e) => setFilterCountry(e.target.value)}
                                     >
-                                        <option value="All">Todos os Países</option>
+                                        <option value="All">{dict.filters.allCountries}</option>
                                         {countries.filter(c => c !== 'All').map(c => <option key={c} value={c}>{c}</option>)}
                                     </select>
                                 </div>
@@ -207,11 +222,10 @@ export default function Vic3AchievementTracker() {
                                         value={filterDifficulty}
                                         onChange={(e) => setFilterDifficulty(e.target.value)}
                                     >
-                                        <option value="All">Qualquer Dif.</option>
-                                        <option value="Fácil">Fácil</option>
-                                        <option value="Médio">Médio</option>
-                                        <option value="Difícil">Difícil</option>
-                                        <option value="Muito Difícil">Muito Dif.</option>
+                                        <option value="All">{dict.filters.anyDifficulty}</option>
+                                        {difficultyKeys.map(d => (
+                                            <option key={d} value={d}>{translateDifficulty(d)}</option>
+                                        ))}
                                     </select>
                                 </div>
 
@@ -226,7 +240,7 @@ export default function Vic3AchievementTracker() {
                                             value={filterType}
                                             onChange={(e) => setFilterType(e.target.value)}
                                         >
-                                            <option value="All">Todos os Tipos de Objetivo</option>
+                                            <option value="All">{dict.filters.allObjectiveTypes}</option>
                                             {types.filter(t => t !== 'All').map(t => <option key={t} value={t}>{t}</option>)}
                                         </select>
                                     </div>
@@ -240,19 +254,19 @@ export default function Vic3AchievementTracker() {
                                         onChange={() => setHideCompleted(!hideCompleted)}
                                     />
                                     <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-                                    <span className="ml-3 text-sm font-medium text-slate-300">Ocultar Completadas</span>
+                                    <span className="ml-3 text-sm font-medium text-slate-300">{dict.filters.hideCompleted}</span>
                                 </label>
                             </div>
                         </div>
 
                         {!isMounted ? (
                             <div className="text-center py-12 text-slate-500 flex flex-col items-center">
-                                <p className="animate-pulse">Carregando conquistas...</p>
+                                <p className="animate-pulse">{dict.achievements.loading}</p>
                             </div>
                         ) : Object.keys(groupedAchievements).length === 0 ? (
                             <div className="text-center py-12 text-slate-500 flex flex-col items-center">
                                 <AlertTriangle className="w-12 h-12 mb-4 text-slate-600" />
-                                <p>Nenhuma conquista encontrada com os filtros atuais.</p>
+                                <p>{dict.achievements.noResults}</p>
                             </div>
                         ) : (
                             <div className="space-y-8">
@@ -284,8 +298,8 @@ export default function Vic3AchievementTracker() {
                 {activeTab === 'guides' && (
                     <div className="space-y-6">
                         <div className="mb-8">
-                            <h2 className="text-3xl font-bold text-white mb-2">Nações Centrais e Estratégias</h2>
-                            <p className="text-slate-400 max-w-3xl">Estes países possuem o maior número de conquistas exclusivas, diários temáticos e mecânicas únicas. Clique em qualquer um deles para ler as estratégias completas de Early Game e Late Game para sobreviver e prosperar.</p>
+                            <h2 className="text-3xl font-bold text-white mb-2">{dict.guides.title}</h2>
+                            <p className="text-slate-400 max-w-3xl">{dict.guides.subtitle}</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

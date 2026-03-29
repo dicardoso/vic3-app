@@ -46,7 +46,7 @@ export const countryGuides = [
     earlyGame: 'Concentre-se nas tecnologias militares (Táticas de Infantaria). Melhore relações com a Rússia e a Grã-Bretanha para isolar a Áustria. Lance a Guerra de Liderança contra a Áustria cedo. Traga os menores estados alemães para sua União Aduaneira e forme a Confederação da Alemanha do Norte.',
     midLateGame: 'A guerra contra a França para retomar Alsácia-Lorena é o teste final para formar o Império Alemão. Uma vez unificado, o país tem as maiores reservas de carvão e ferro da Europa. Industrialize furiosamente e construa um Bloco de Poder. Eventualmente, você precisará de portos e colônias africanas para não ficar para trás na corrida por borracha e petróleo.',
     relatedAchievements: ['Três Vivas', 'Ferro e Sangue', 'A Place in the Sun', 'Um Conto de Duas Cidades', 'O Único e a Sua Propriedade'],
-    flagColor: 'bg-slate-800',
+    flagColor: 'bg-slate-700',
     icon: <Swords className="w-8 h-8 text-white" />
   },
   {
@@ -58,7 +58,7 @@ export const countryGuides = [
     earlyGame: 'É estressante. Concentre cada recurso do Estado em cumprir as entradas do Diário do Tanzimat. Reforme o exército, recupere a Síria do Egito na primeira década (consiga um aliado europeu forte para ajudar) e passe a lei de Educação/Burocracia. Suprima as constantes revoltas nos Bálcãs.',
     midLateGame: 'Se você sobreviver ao Tanzimat, a recompensa é imensa. Você controlará vastas reservas de petróleo cru no Oriente Médio e terá uma população gigantesca. O jogo muda da sobrevivência para a retaliação. Expanda-se na Pérsia, unifique o mundo islâmico e torne-se o maior produtor global.',
     relatedAchievements: ['Tanzimat', 'O Homem Saudável da Europa', 'O Homem Doente da Europa', 'O Homem Doente Recupera-se'],
-    flagColor: 'bg-green-800',
+    flagColor: 'bg-red-800',
     icon: <Target className="w-8 h-8 text-white" />
   },
   {

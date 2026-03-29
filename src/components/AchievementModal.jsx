@@ -1,8 +1,11 @@
 import { CheckCircle2, Map, Target, BookOpen, X } from 'lucide-react';
 import IconMapper from './IconMapper';
 import { getDifficultyColor } from '@/utils/helpers';
+import { useDictionary } from './DictionaryContext';
 
 export default function AchievementModal({ selectedAchievement, onClose, onToggle }) {
+    const { dict } = useDictionary();
+
     if (!selectedAchievement) return null;
 
     return (
@@ -38,14 +41,14 @@ export default function AchievementModal({ selectedAchievement, onClose, onToggl
 
                 <div className="p-6 space-y-8">
                     <section>
-                        <h3 className="text-sm uppercase tracking-widest text-slate-500 font-semibold mb-2">Descrição Oficial</h3>
+                        <h3 className="text-sm uppercase tracking-widest text-slate-500 font-semibold mb-2">{dict.achievements.officialDescription}</h3>
                         <p className="text-lg text-slate-300">{selectedAchievement.description}</p>
                     </section>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <section className="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
                             <h3 className="flex items-center gap-2 text-amber-500 font-semibold mb-3">
-                                <Map className="w-4 h-4" /> Requisitos de Início
+                                <Map className="w-4 h-4" /> {dict.achievements.startRequirements}
                             </h3>
                             <p className="text-sm text-slate-300 leading-relaxed">
                                 {selectedAchievement.startCondition}
@@ -54,7 +57,7 @@ export default function AchievementModal({ selectedAchievement, onClose, onToggl
 
                         <section className="bg-slate-800/50 p-4 rounded-xl border border-slate-700">
                             <h3 className="flex items-center gap-2 text-green-500 font-semibold mb-3">
-                                <Target className="w-4 h-4" /> Condições de Vitória
+                                <Target className="w-4 h-4" /> {dict.achievements.victoryConditions}
                             </h3>
                             <p className="text-sm text-slate-300 leading-relaxed">
                                 {selectedAchievement.victoryCondition}
@@ -64,7 +67,7 @@ export default function AchievementModal({ selectedAchievement, onClose, onToggl
 
                     <section className="bg-amber-950/20 p-5 rounded-xl border border-amber-900/30">
                         <h3 className="flex items-center gap-2 text-amber-500 font-bold mb-4 text-lg border-b border-amber-900/50 pb-2">
-                            <BookOpen className="w-5 h-5" /> Dica Rápida de Estratégia
+                            <BookOpen className="w-5 h-5" /> {dict.achievements.strategyTip}
                         </h3>
                         <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
                             {selectedAchievement.strategy}
@@ -81,9 +84,9 @@ export default function AchievementModal({ selectedAchievement, onClose, onToggl
                             }`}
                     >
                         {selectedAchievement.completed ? (
-                            <>Desmarcar Conquista</>
+                            <>{dict.achievements.uncheckAchievement}</>
                         ) : (
-                            <><CheckCircle2 className="w-5 h-5" /> Marcar como Concluída</>
+                            <><CheckCircle2 className="w-5 h-5" /> {dict.achievements.markAsCompleted}</>
                         )}
                     </button>
                 </div>

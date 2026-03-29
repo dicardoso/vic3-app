@@ -1,6 +1,9 @@
 import { X, Globe, Target, Shield, Trophy, CheckCircle2, Circle } from 'lucide-react';
+import { useDictionary } from './DictionaryContext';
 
 export default function GuideModal({ guide, achievements, onClose }) {
+    const { dict } = useDictionary();
+
     if (!guide) return null;
 
     return (
@@ -40,7 +43,7 @@ export default function GuideModal({ guide, achievements, onClose }) {
                 <div className="p-6 md:p-8 space-y-8">
                     <section>
                         <h3 className="flex items-center gap-2 text-xl text-white font-bold mb-3 border-b border-slate-800 pb-2">
-                            <Globe className="w-5 h-5 text-amber-500" /> Visão Geral
+                            <Globe className="w-5 h-5 text-amber-500" /> {dict.guides.overview}
                         </h3>
                         <p className="text-slate-300 leading-relaxed">
                             {guide.overview}
@@ -50,7 +53,7 @@ export default function GuideModal({ guide, achievements, onClose }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <section className="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
                             <h3 className="flex items-center gap-2 text-lg text-green-400 font-bold mb-3">
-                                <Target className="w-5 h-5" /> Primeiros Passos (Early Game)
+                                <Target className="w-5 h-5" /> {dict.guides.earlyGame}
                             </h3>
                             <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
                                 {guide.earlyGame}
@@ -59,7 +62,7 @@ export default function GuideModal({ guide, achievements, onClose }) {
 
                         <section className="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
                             <h3 className="flex items-center gap-2 text-amber-500 font-bold text-lg mb-3">
-                                <Shield className="w-5 h-5" /> Estratégia Consolidada (Mid/Late Game)
+                                <Shield className="w-5 h-5" /> {dict.guides.midLateGame}
                             </h3>
                             <p className="text-slate-300 text-sm leading-relaxed whitespace-pre-line">
                                 {guide.midLateGame}
@@ -69,7 +72,7 @@ export default function GuideModal({ guide, achievements, onClose }) {
 
                     <section className="bg-amber-950/20 p-5 rounded-xl border border-amber-900/30">
                         <h3 className="flex items-center gap-2 text-amber-500 font-bold mb-4 text-lg border-b border-amber-900/50 pb-2">
-                            <Trophy className="w-5 h-5" /> Conquistas Fortemente Associadas
+                            <Trophy className="w-5 h-5" /> {dict.guides.relatedAchievements}
                         </h3>
                         <div className="flex flex-wrap gap-2 mt-3">
                             {guide.relatedAchievements.map((achName, idx) => {

@@ -1,6 +1,9 @@
 import { ChevronDown } from 'lucide-react';
+import { useDictionary } from './DictionaryContext';
 
 export default function GuideCard({ guide, onClick }) {
+    const { dict } = useDictionary();
+
     return (
         <div 
             onClick={onClick}
@@ -20,11 +23,11 @@ export default function GuideCard({ guide, onClick }) {
                     </span>
                 </div>
                 <p className="text-sm text-slate-300 mb-4 h-16 line-clamp-3">
-                    <span className="font-semibold text-slate-400">Foco: </span> 
+                    <span className="font-semibold text-slate-400">{dict.guides.focus}: </span> 
                     {guide.focus}
                 </p>
                 <div className="flex items-center text-sm font-medium text-amber-500">
-                    Ler o guia completo <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
+                    {dict.guides.readFullGuide} <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
                 </div>
             </div>
         </div>

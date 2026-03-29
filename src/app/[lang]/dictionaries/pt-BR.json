@@ -1,0 +1,60 @@
+{
+  "header": {
+    "subtitle": "Guia e Rastreador",
+    "progress": "Progresso Geral",
+    "tabs": {
+      "achievements": "Lista de Conquistas",
+      "guides": "Guias de Países Principais"
+    }
+  },
+  "filters": {
+    "searchPlaceholder": "Buscar conquista, país ou condição...",
+    "noGrouping": "Sem Agrupamento",
+    "groupByCountry": "Agrupar por País",
+    "groupByDifficulty": "Agrupar por Dificuldade",
+    "groupByType": "Agrupar por Tipo",
+    "allCountries": "Todos os Países",
+    "anyDifficulty": "Qualquer Dif.",
+    "allObjectiveTypes": "Todos os Tipos de Objetivo",
+    "hideCompleted": "Ocultar Completadas"
+  },
+  "difficulties": {
+    "easy": "Fácil",
+    "medium": "Médio",
+    "hard": "Difícil",
+    "veryHard": "Muito Difícil",
+    "easyToMedium": "Fácil a Médio",
+    "mediumToHard": "Médio a Difícil"
+  },
+  "achievements": {
+    "allAchievements": "Todas as Conquistas",
+    "others": "Outros",
+    "loading": "Carregando conquistas...",
+    "noResults": "Nenhuma conquista encontrada com os filtros atuais.",
+    "uncheck": "Desmarcar",
+    "markCompleted": "Marcar como concluída",
+    "uncheckAchievement": "Desmarcar Conquista",
+    "markAsCompleted": "Marcar como Concluída",
+    "officialDescription": "Descrição Oficial",
+    "startRequirements": "Requisitos de Início",
+    "victoryConditions": "Condições de Vitória",
+    "strategyTip": "Dica Rápida de Estratégia"
+  },
+  "guides": {
+    "title": "Nações Centrais e Estratégias",
+    "subtitle": "Estes países possuem o maior número de conquistas exclusivas, diários temáticos e mecânicas únicas. Clique em qualquer um deles para ler as estratégias completas de Early Game e Late Game para sobreviver e prosperar.",
+    "focus": "Foco",
+    "readFullGuide": "Ler o guia completo",
+    "overview": "Visão Geral",
+    "earlyGame": "Primeiros Passos (Early Game)",
+    "midLateGame": "Estratégia Consolidada (Mid/Late Game)",
+    "relatedAchievements": "Conquistas Fortemente Associadas"
+  },
+  "languageSwitcher": {
+    "label": "Idioma"
+  },
+  "metadata": {
+    "title": "Victoria 3 — Conquistas e Guias",
+    "description": "Rastreador de conquistas e guias de estratégia para Victoria 3"
+  }
+}

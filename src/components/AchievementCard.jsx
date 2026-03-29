@@ -1,8 +1,11 @@
 import { CheckCircle2, Circle, Map } from 'lucide-react';
 import IconMapper from './IconMapper';
 import { getDifficultyColor } from '@/utils/helpers';
+import { useDictionary } from './DictionaryContext';
 
 export default function AchievementCard({ ach, onClick, onToggle }) {
+    const { dict } = useDictionary();
+
     return (
         <div
             onClick={onClick}
@@ -19,7 +22,7 @@ export default function AchievementCard({ ach, onClick, onToggle }) {
                     <button
                         onClick={onToggle}
                         className="p-1 -mr-2 -mt-2 hover:bg-slate-700 rounded-full transition-colors"
-                        title={ach.completed ? "Desmarcar" : "Marcar como concluída"}
+                        title={ach.completed ? dict.achievements.uncheck : dict.achievements.markCompleted}
                     >
                         {ach.completed ? (
                             <CheckCircle2 className="w-6 h-6 text-green-500" />

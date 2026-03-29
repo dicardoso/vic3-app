@@ -1,0 +1,60 @@
+{
+  "header": {
+    "subtitle": "Guide & Tracker",
+    "progress": "Overall Progress",
+    "tabs": {
+      "achievements": "Achievement List",
+      "guides": "Main Country Guides"
+    }
+  },
+  "filters": {
+    "searchPlaceholder": "Search achievement, country or condition...",
+    "noGrouping": "No Grouping",
+    "groupByCountry": "Group by Country",
+    "groupByDifficulty": "Group by Difficulty",
+    "groupByType": "Group by Type",
+    "allCountries": "All Countries",
+    "anyDifficulty": "Any Difficulty",
+    "allObjectiveTypes": "All Objective Types",
+    "hideCompleted": "Hide Completed"
+  },
+  "difficulties": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "veryHard": "Very Hard",
+    "easyToMedium": "Easy to Medium",
+    "mediumToHard": "Medium to Hard"
+  },
+  "achievements": {
+    "allAchievements": "All Achievements",
+    "others": "Others",
+    "loading": "Loading achievements...",
+    "noResults": "No achievements found with current filters.",
+    "uncheck": "Uncheck",
+    "markCompleted": "Mark as completed",
+    "uncheckAchievement": "Uncheck Achievement",
+    "markAsCompleted": "Mark as Completed",
+    "officialDescription": "Official Description",
+    "startRequirements": "Start Requirements",
+    "victoryConditions": "Victory Conditions",
+    "strategyTip": "Quick Strategy Tip"
+  },
+  "guides": {
+    "title": "Core Nations & Strategies",
+    "subtitle": "These countries have the most exclusive achievements, thematic journals, and unique mechanics. Click any of them to read the complete Early Game and Late Game strategies to survive and thrive.",
+    "focus": "Focus",
+    "readFullGuide": "Read the full guide",
+    "overview": "Overview",
+    "earlyGame": "First Steps (Early Game)",
+    "midLateGame": "Consolidated Strategy (Mid/Late Game)",
+    "relatedAchievements": "Strongly Related Achievements"
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  },
+  "metadata": {
+    "title": "Victoria 3 — Achievements & Guides",
+    "description": "Achievement tracker and strategy guides for Victoria 3"
+  }
+}
