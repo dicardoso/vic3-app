@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen } from 'lucide-react';
+import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory } from 'lucide-react';
 
 import { initialAchievements } from '@/data/achievements';
 import { countryGuides } from '@/data/guides';
@@ -13,6 +13,7 @@ import GuideModal from '@/components/GuideModal';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useDictionary } from '@/components/DictionaryContext';
 import { getDifficultyKey } from '@/utils/helpers';
+import EconomyTab from '@/components/EconomyTab';
 
 export default function Vic3AchievementTracker() {
     const { dict, lang } = useDictionary();
@@ -171,6 +172,16 @@ export default function Vic3AchievementTracker() {
                         >
                         <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> {dict.header.tabs.guides}</div>
                         </button>
+                        <button 
+                        onClick={() => setActiveTab('economy')}
+                        className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+                            activeTab === 'economy' 
+                            ? 'border-amber-500 text-amber-500' 
+                            : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                        }`}
+                        >
+                        <div className="flex items-center gap-2"><Factory className="w-4 h-4" /> {dict.header.tabs.economy}</div>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -312,6 +323,10 @@ export default function Vic3AchievementTracker() {
                             ))}
                         </div>
                     </div>
+                )}
+
+                {activeTab === 'economy' && (
+                    <EconomyTab />
                 )}
             </main>
 

@@ -4,8 +4,21 @@
     "progress": "Overall Progress",
     "tabs": {
       "achievements": "Achievement List",
-      "guides": "Main Country Guides"
+      "guides": "Main Country Guides",
+      "economy": "Economy & Industry"
     }
+  },
+  "economy": {
+    "macroTitle": "The Gears of the Economy (Macroeconomics)",
+    "macroSubtitle": "Understanding the flow of money is essential for hegemonic achievements. In Victoria 3, your government rarely generates money out of thin air (except for Gold Minting). The economy is based on a closed cycle where Population, Jobs, Wages, and Consumption Expenditures dictate GDP growth.",
+    "microTitle": "Quick Guide to Production Chains (Microeconomics)",
+    "microSubtitle": "Many achievements require becoming the largest producer of certain goods or building late-century armies. Knowing advanced production methods (PMs) by heart avoids vital resource shortages and bankruptcies in the interconnected market.",
+    "lawsAndTips": "View Laws and Tips details",
+    "analyzeFlow": "Analyze Flow",
+    "requiresInput": "Requires (Base Inputs):",
+    "pmTipTitle": "Production Methods (PMs) Tip",
+    "pmTipDescription": "Whenever you unlock a new technology that changes the production method, check the local tabs (F3 in-game). Changing everything at once without having the intermediate resources ready in your market will cause prices to skyrocket.",
+    "close": "Close"
   },
   "filters": {
     "searchPlaceholder": "Search achievement, country or condition...",

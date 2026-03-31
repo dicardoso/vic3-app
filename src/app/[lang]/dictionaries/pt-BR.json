@@ -4,8 +4,21 @@
     "progress": "Progresso Geral",
     "tabs": {
       "achievements": "Lista de Conquistas",
-      "guides": "Guias de Países Principais"
+      "guides": "Guias de Países Principais",
+      "economy": "Economia e Indústria"
     }
+  },
+  "economy": {
+    "macroTitle": "As Engrenagens da Economia (Macroeconomia)",
+    "macroSubtitle": "Compreender o fluxo do dinheiro é essencial para conquistas hegemônicas. Em Victoria 3, o seu governo raramente gera dinheiro do nada (exceto Cunhagem/Minting de Ouro). A economia baseia-se num ciclo fechado onde População, Empregos, Salários e Despesas de Consumo ditam o crescimento do PIB.",
+    "microTitle": "Guia Rápido de Cadeias de Produção (Microeconomia)",
+    "microSubtitle": "Muitas conquistas exigem que se torne o maior produtor de certos bens ou construa exércitos do final do século. Saber de cor os métodos de produção avançados (PMs) evita escassez de recursos vitais e falências no mercado interconectado.",
+    "lawsAndTips": "Ver detalhes das Leis e Dicas",
+    "analyzeFlow": "Analisar Fluxo",
+    "requiresInput": "Requer (Inputs base):",
+    "pmTipTitle": "Dica de Métodos de Produção (PMs)",
+    "pmTipDescription": "Sempre que desbloquear uma nova tecnologia que altera a forma de produção, verifique as abas locais (F3 no jogo). Trocar tudo de uma vez sem ter os recursos intermediários prontos no seu mercado fará os preços dispararem.",
+    "close": "Fechar"
   },
   "filters": {
     "searchPlaceholder": "Buscar conquista, país ou condição...",

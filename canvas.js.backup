@@ -3,7 +3,8 @@ import {
   Trophy, Search, Filter, CheckCircle2, Circle, 
   Map, Target, BookOpen, Star, AlertTriangle, 
   X, ChevronDown, Award, Globe, Shield, Coins, Users,
-  Landmark, Swords, Navigation
+  Landmark, Swords, Navigation, Factory, TrendingUp, 
+  ArrowRight, Combine, Settings, DollarSign, Info, Pickaxe
 } from 'lucide-react';
 
 // --- BANCO DE DADOS DE CONQUISTAS (Expandido) ---
@@ -1673,9 +1674,108 @@ const countryGuides = [
   }
 ];
 
+// --- BANCO DE DADOS DE ECONOMIA E PRODUÇÃO (Expandido e Interativo) ---
+const macroConcepts = [
+  {
+    title: 'O Fundo de Investimento (Investment Pool)',
+    icon: <DollarSign className="w-5 h-5 text-amber-500" />,
+    description: 'Dinheiro gerado pelos Lucros das construções. É usado para pagar novas construções civis gratuitamente.',
+    extendedDetails: 'O Fundo de Investimento age como uma reserva automática de capital (Private Construction). Os donos das fábricas (Capitalistas) e terras (Aristocratas) depositam uma porcentagem fixa de seus dividendos aqui. O Estado pode utilizar este fundo para pagar os materiais e salários do setor de construção, o que significa que, em economias fortes, você pode expandir a sua indústria sem gastar um centavo do tesouro público.',
+    lawsImpact: [
+      'Laissez-Faire (Capitalismo Livre): +25% de contribuição de Capitalistas. O fundo constrói autonomamente a maioria das fábricas.',
+      'Intervencionismo: Menos eficiência de contribuição, mas o Estado pode usar o fundo para subsidiar qualquer indústria e construir fazendas.',
+      'Economia de Comando: Remove totalmente o fundo de investimento. Todo o lucro das fábricas vai direto para o tesouro do Governo (mas exige enorme capacidade burocrática).'
+    ],
+    proTip: 'No início do jogo, países agrários dependem de Aristocratas (Agrarianismo). Industrialize rapidamente com fábricas de Ferramentas/Roupas para criar uma base de Capitalistas, que são muito mais eficientes em reinvestir na economia.',
+    colorTheme: 'text-amber-500',
+    bgColorTheme: 'bg-amber-500/20'
+  },
+  {
+    title: 'Padrão de Vida (Standard of Living / SoL)',
+    icon: <Users className="w-5 h-5 text-green-400" />,
+    description: 'Calculado pela Renda Pós-Impostos vs Custo das Necessidades. Afeta diretamente lealdade e imigração.',
+    extendedDetails: 'O Padrão de Vida (SoL) dita a estabilidade da sua nação. Cada grupo populacional (Pop) possui um "nível esperado" baseado em sua classe social e alfabetização. Se a renda deles cobrir o custo dos bens básicos (Grãos, Roupas, Móveis) e sobrar dinheiro para bens de luxo, o SoL sobe, criando Legalistas. Se houver escassez ou altos impostos, o SoL cai, criando Radicais que iniciarão rebeliões.',
+    lawsImpact: [
+      'Impostos Proporcionais / Graduados: Reduz o peso dos impostos sobre as classes baixas (aumentando o SoL deles) e taxa os dividendos dos ricos.',
+      'Assistência Social (Poor Laws / Wage Subsidies): Garante uma renda mínima para os desempregados, evitando que o SoL caia para níveis de inanição.',
+      'Fronteiras Abertas: Um SoL nacional alto em relação aos países vizinhos atrairá fluxos massivos de imigração, explodindo a sua população produtiva.'
+    ],
+    proTip: 'Não foque apenas em aumentar salários; reduzir o custo de vida é mais barato. Importe Grãos e Peixes em grande escala, ou construa muitas fazendas locais. Comida barata significa que sobra dinheiro para os Pops comprarem Roupas e Móveis, impulsionando a sua indústria manufatureira.',
+    colorTheme: 'text-green-400',
+    bgColorTheme: 'bg-green-500/20'
+  },
+  {
+    title: 'Capacidade de Impostos e Desperdício',
+    icon: <TrendingUp className="w-5 h-5 text-red-400" />,
+    description: 'A habilidade de coletar dinheiro. Baixa capacidade gera Desperdício de Impostos (Tax Waste).',
+    extendedDetails: 'A Capacidade de Impostos (Taxation Capacity) determina quão eficientemente os agentes do estado coletam impostos nas províncias. Em países densamente povoados (como China, Rússia, ou Japão), os estados rurais frequentemente sofrem de capacidade negativa. Isso gera "Desperdício de Impostos", o que significa que o dinheiro é retirado da população (diminuindo seu SoL) mas NÃO entra nos seus cofres.',
+    lawsImpact: [
+      'Imposto Territorial (Land-Based): Difícil de coletar de forma justa, altamente ineficiente e cria grande poder para os latifundiários.',
+      'Imposto Per Capita: Melhor capacidade e rendimento para meio de jogo.',
+      'Burocracia Apontada / Eleita: Oferecem +25% e +15% de capacidade de impostos base, essenciais para não perder dinheiro em impérios vastos.'
+    ],
+    proTip: 'Construa Administrações Governamentais nas províncias com déficit de impostos, mas atenção: o papel (Paper) e os salários que essas administrações consomem muitas vezes custam mais do que o imposto recuperado no early-game. Use novas tecnologias sociais e as leis corretas primeiro!',
+    colorTheme: 'text-red-400',
+    bgColorTheme: 'bg-red-500/20'
+  }
+];
+
+const productionChains = [
+  {
+    output: 'Ferramentas',
+    category: 'Intermediário Base',
+    tier: 'bg-slate-700',
+    inputs: ['Madeira', 'Ferro', 'Aço (Avançado)'],
+    description: 'A espinha dorsal da industrialização.',
+    pmEvolution: 'Começa produzindo ferramentas grosseiras de Madeira. A transição para Ferramentas de Ferro (Iron Tools) duplica a produção, mas exige expansão massiva de Minas de Ferro. No late-game, Ferramentas de Aço exigem Aço refinado.',
+    primaryUses: 'Absolutamente tudo. Usado em minas de carvão, campos de trigo, plantações de algodão, portos e engrenagens industriais. Escassez de ferramentas quebra a economia inteira.',
+    icon: <Pickaxe className="w-6 h-6 text-white/80" />
+  },
+  {
+    output: 'Aço',
+    category: 'Indústria Pesada',
+    tier: 'bg-slate-600',
+    inputs: ['Ferro', 'Carvão'],
+    description: 'Necessário para a transição do meio do jogo e construção civil de alto nível.',
+    pmEvolution: 'Fornos Bessemer (Bessemer Process) e Fornos Martin-Siemens (Open-Hearth) aumentarão vertiginosamente o consumo de Carvão para produzir grandes quantidades de Aço. A Eletricidade permite fornos elétricos no século XX.',
+    primaryUses: 'Motores, Artilharia, Navios a Vapor (Steamers), Construção de Estrutura de Aço (nível 3 de Setores de Construção) e Ferramentas avançadas.',
+    icon: <Factory className="w-6 h-6 text-white/80" />
+  },
+  {
+    output: 'Motores (Engines)',
+    category: 'Indústria Avançada',
+    tier: 'bg-emerald-800',
+    inputs: ['Aço', 'Carvão', 'Borracha (Tardio)'],
+    description: 'Move as ferrovias, garantindo Infraestrutura (Market Access) para os estados.',
+    pmEvolution: 'Começa consumindo apenas Aço. O método "Locomotivas a Vapor" adiciona grande consumo de Carvão. No final do jogo, o motor de combustão ou motores elétricos exigirão Petróleo e Eletricidade para serem montados.',
+    primaryUses: 'Ferrovias (Railways) para criar Infraestrutura. Também consumido na criação de Automóveis, Aviões, Tratores (para uso agrário) e Bombas para aumentar o rendimento das minas.',
+    icon: <Combine className="w-6 h-6 text-white/80" />
+  },
+  {
+    output: 'Móveis & Roupas de Luxo',
+    category: 'Bens de Consumo',
+    tier: 'bg-purple-900',
+    inputs: ['Madeira de Lei (Hardwood)', 'Seda', 'Corantes', 'Ferramentas'],
+    description: 'Essenciais para pacificar e extrair impostos das classes ricas.',
+    pmEvolution: 'Bens de luxo não são fábricas isoladas, são métodos de produção secundários nas fábricas normais. Ao ativar o PM de "Móveis de Luxo" na fábrica de móveis, ela consumirá Madeira de Lei para produzir itens caros ao lado dos normais.',
+    primaryUses: 'Consumo exclusivo das Pops Ricas (Aristocratas e Capitalistas a partir do SoL 15). Tê-los baratos e abundantes aumenta o padrão de vida global e gera uma base tributária gigantesca sob leis de Imposto Graduado.',
+    icon: <Star className="w-6 h-6 text-white/80" />
+  },
+  {
+    output: 'Artilharia & Tanques',
+    category: 'Indústria Militar',
+    tier: 'bg-red-900',
+    inputs: ['Aço', 'Explosivos', 'Peças de Máquina', 'Automóveis', 'Borracha'],
+    description: 'Armamento de ponta para dominar nas Guerras Mundiais e Grandes Jogos.',
+    pmEvolution: 'Explosivos derivam de Fábricas de Químicos (consomem Enxofre e Fertilizante). A evolução para Armamento de Cerco e, finalmente, Tanques, exigirá que você converta as suas produções em linhas de montagem pesadas de Automóveis (que precisam de Motores e Borracha).',
+    primaryUses: 'Consumidos diretamente pelos seus Quarteis Militares. Uma escassez destes itens durante uma guerra causará um debuff massivo de suprimento nos seus exércitos, resultando em derrotas certas.',
+    icon: <Target className="w-6 h-6 text-white/80" />
+  }
+];
+
 export default function Vic3AchievementTracker() {
   // --- STATES ---
-  const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides'
+  const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides' | 'economy'
   
   // Achievement States
   const [achievements, setAchievements] = useState([]);
@@ -1689,6 +1789,10 @@ export default function Vic3AchievementTracker() {
   
   // Guide States
   const [selectedGuide, setSelectedGuide] = useState(null);
+
+  // Economy States
+  const [selectedMacro, setSelectedMacro] = useState(null);
+  const [selectedChain, setSelectedChain] = useState(null);
 
   // --- LOCAL STORAGE SYNC ---
   useEffect(() => {
@@ -1834,6 +1938,16 @@ export default function Vic3AchievementTracker() {
               }`}
             >
               <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guias de Países Principais</div>
+            </button>
+            <button 
+              onClick={() => setActiveTab('economy')}
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+                activeTab === 'economy' 
+                ? 'border-amber-500 text-amber-500' 
+                : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+              }`}
+            >
+              <div className="flex items-center gap-2"><Factory className="w-4 h-4" /> Economia e Indústria</div>
             </button>
           </div>
         </div>
@@ -2016,7 +2130,6 @@ export default function Vic3AchievementTracker() {
                   className="bg-slate-800 border border-slate-700 hover:border-amber-500/50 rounded-xl overflow-hidden cursor-pointer transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-900/10"
                 >
                   <div className={`h-24 ${guide.flagColor} flex items-center justify-center relative overflow-hidden`}>
-                     {/* Estilização abstrata de bandeira */}
                      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
                      <div className="z-10 bg-slate-900/30 p-3 rounded-full backdrop-blur-sm shadow-xl border border-white/10">
                         {guide.icon}
@@ -2040,6 +2153,116 @@ export default function Vic3AchievementTracker() {
                 </div>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* ========================================= */}
+        {/* ABA 3: ECONOMIA E INDÚSTRIA               */}
+        {/* ========================================= */}
+        {activeTab === 'economy' && (
+          <div className="space-y-12">
+            
+            <div className="mb-8 border-b border-slate-800 pb-8">
+              <h2 className="text-3xl font-bold text-white mb-3">As Engrenagens da Economia (Macroeconomia)</h2>
+              <p className="text-slate-400 max-w-4xl mb-8 leading-relaxed">
+                Compreender o fluxo do dinheiro é essencial para conquistas hegemônicas. Em Victoria 3, o seu governo raramente gera dinheiro do nada (exceto Cunhagem/Minting de Ouro). A economia baseia-se num ciclo fechado onde População, Empregos, Salários e Despesas de Consumo ditam o crescimento do PIB. Se os impostos forem altos e os salários baixos, a economia estagna; se os lucros das indústrias forem massivos, o Fundo de Investimento (Investment Pool) dispara, financiando sua infraestrutura gratuitamente.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {macroConcepts.map((concept, i) => (
+                  <div 
+                    key={i} 
+                    onClick={() => setSelectedMacro(concept)}
+                    className="bg-slate-800/40 border border-slate-700 rounded-xl p-5 hover:border-amber-500/50 hover:bg-slate-800 cursor-pointer transition-all shadow-sm hover:shadow-lg group"
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-lg shadow-sm border border-slate-700/50 ${concept.bgColorTheme}`}>
+                          {concept.icon}
+                        </div>
+                        <h3 className="text-lg font-bold text-white leading-tight pr-2">{concept.title}</h3>
+                      </div>
+                      <Info className={`w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity ${concept.colorTheme}`} />
+                    </div>
+                    <p className="text-sm text-slate-300 leading-relaxed mb-4">
+                      {concept.description}
+                    </p>
+                    <div className={`flex items-center text-sm font-semibold ${concept.colorTheme}`}>
+                      Ver detalhes das Leis e Dicas <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-3xl font-bold text-white mb-3">Guia Rápido de Cadeias de Produção (Microeconomia)</h2>
+              <p className="text-slate-400 max-w-4xl mb-8 leading-relaxed">
+                Muitas conquistas exigem que se torne o maior produtor de certos bens ou construa exércitos do final do século (como Tanques ou Aviões). Saber de cor os métodos de produção avançados (PMs) evita escassez de recursos vitais e falências no mercado interconectado.
+              </p>
+
+              <div className="space-y-4">
+                {productionChains.map((chain, i) => (
+                  <div 
+                    key={i} 
+                    onClick={() => setSelectedChain(chain)}
+                    className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden flex flex-col md:flex-row group hover:border-amber-500/50 cursor-pointer transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                  >
+                    
+                    {/* Resultado Final */}
+                    <div className={`md:w-1/3 ${chain.tier} p-5 flex flex-col justify-center border-b md:border-b-0 md:border-r border-black/30 relative overflow-hidden`}>
+                      <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                         <Info className="w-5 h-5 text-white/50" />
+                      </div>
+                      <div className="flex justify-between items-center mb-1 relative z-10">
+                        <h4 className="text-xl font-bold text-white">{chain.output}</h4>
+                        {chain.icon}
+                      </div>
+                      <span className="text-xs uppercase tracking-wider font-semibold text-white/70 relative z-10">
+                        {chain.category}
+                      </span>
+                    </div>
+
+                    {/* Fluxo / Inputs */}
+                    <div className="md:w-2/3 p-5 flex flex-col justify-center bg-slate-800/50 relative">
+                      <div className="flex flex-wrap items-center gap-3 mb-4">
+                        <span className="text-sm text-slate-400 font-medium">Requer (Inputs base):</span>
+                        {chain.inputs.map((input, idx) => (
+                          <React.Fragment key={idx}>
+                            <span className="bg-slate-900 text-amber-500 px-3 py-1 rounded-md text-sm border border-slate-700 font-semibold shadow-inner">
+                              {input}
+                            </span>
+                            {idx < chain.inputs.length - 1 && (
+                              <span className="text-slate-500 text-lg">+</span>
+                            )}
+                          </React.Fragment>
+                        ))}
+                      </div>
+                      
+                      <div className="flex gap-3 items-center">
+                        <p className="text-sm text-slate-300 leading-relaxed">
+                          {chain.description}
+                        </p>
+                        <div className="ml-auto flex items-center text-xs font-semibold text-amber-500 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+                          Analisar Fluxo <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-8 p-5 bg-blue-900/20 border border-blue-800/30 rounded-xl">
+                <h4 className="text-lg font-bold text-blue-400 flex items-center gap-2 mb-2">
+                  <Settings className="w-5 h-5" /> Dica de Métodos de Produção (PMs)
+                </h4>
+                <p className="text-sm text-blue-200/80 leading-relaxed">
+                  Sempre que desbloquear uma nova tecnologia que altera a forma de produção (ex: Motores nas Minas, Fornos de Aço Bessemer), verifique as abas locais (F3 no jogo). Trocar tudo de uma vez sem ter os recursos intermediários prontos no seu mercado fará os preços dispararem, arruinando sua lucratividade e o padrão de vida da sua população. Expanda o acesso a carvão e ferro antes de modernizar a rede.
+                </p>
+              </div>
+            </div>
+            
           </div>
         )}
       </main>
@@ -2208,7 +2431,6 @@ export default function Vic3AchievementTracker() {
                 </h3>
                 <div className="flex flex-wrap gap-2 mt-3">
                   {selectedGuide.relatedAchievements.map((achName, idx) => {
-                    // Verifica se a conquista já está concluída nos dados gerais
                     const isCompleted = achievements.find(a => a.name === achName)?.completed;
                     
                     return (
@@ -2224,6 +2446,144 @@ export default function Vic3AchievementTracker() {
                   })}
                 </div>
               </section>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================= */}
+      {/* MODAL: CONCEITOS MACROECONÔMICOS            */}
+      {/* ========================================= */}
+      {selectedMacro && activeTab === 'economy' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedMacro(null)}>
+          <div 
+            className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/50"
+            onClick={e => e.stopPropagation()} 
+          >
+            <div className="sticky top-0 bg-slate-900/95 backdrop-blur z-10 p-6 border-b border-slate-800 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <div className={`p-3 rounded-xl shadow-sm border border-slate-700 ${selectedMacro.bgColorTheme}`}>
+                  {selectedMacro.icon}
+                </div>
+                <h2 className="text-2xl font-bold text-white">{selectedMacro.title}</h2>
+              </div>
+              <button 
+                onClick={() => setSelectedMacro(null)}
+                className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-400 hover:text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-6">
+              <section>
+                <h3 className="text-sm uppercase tracking-widest text-slate-500 font-semibold mb-2">Visão Detalhada</h3>
+                <p className="text-slate-300 leading-relaxed">{selectedMacro.extendedDetails}</p>
+              </section>
+
+              <section className="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+                <h3 className="flex items-center gap-2 text-lg text-white font-bold mb-3">
+                  <Landmark className="w-5 h-5 text-amber-500" /> Impacto das Leis Políticas
+                </h3>
+                <ul className="space-y-3">
+                  {selectedMacro.lawsImpact.map((law, idx) => (
+                    <li key={idx} className="text-sm text-slate-300 flex items-start gap-2">
+                      <span className={`w-1.5 h-1.5 rounded-full mt-1.5 shrink-0 ${selectedMacro.colorTheme.replace('text-', 'bg-')}`}></span>
+                      {law}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              <section className="bg-blue-900/20 p-5 rounded-xl border border-blue-800/30">
+                <h3 className="flex items-center gap-2 text-blue-400 font-bold mb-2">
+                  <Settings className="w-5 h-5" /> Dica de Jogador (Pro Tip)
+                </h3>
+                <p className="text-sm text-blue-200/80 leading-relaxed">
+                  {selectedMacro.proTip}
+                </p>
+              </section>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================= */}
+      {/* MODAL: CADEIAS DE PRODUÇÃO (MICROECONOMIA)*/}
+      {/* ========================================= */}
+      {selectedChain && activeTab === 'economy' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedChain(null)}>
+          <div 
+            className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/50"
+            onClick={e => e.stopPropagation()} 
+          >
+            <div className={`sticky top-0 ${selectedChain.tier} z-10 p-6 flex justify-between items-center border-b border-black/30 relative overflow-hidden`}>
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
+              <div className="flex items-center gap-4 relative z-10">
+                <div className="p-3 bg-black/30 rounded-xl shadow-inner border border-white/10">
+                  {selectedChain.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white drop-shadow-md">{selectedChain.output}</h2>
+                  <span className="text-xs uppercase tracking-wider font-semibold text-white/80 drop-shadow-sm">
+                    {selectedChain.category}
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setSelectedChain(null)}
+                className="p-2 bg-black/30 hover:bg-black/50 rounded-full text-white/80 hover:text-white transition-colors relative z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 md:p-8 space-y-8">
+              
+              {/* Fluxo Visual Interativo */}
+              <div className="flex flex-col items-center bg-slate-950 p-6 rounded-xl border border-slate-800 shadow-inner relative">
+                <div className="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-4 absolute top-3 left-4">Fluxo de Produção</div>
+                
+                <div className="flex flex-wrap justify-center items-center gap-4 w-full mt-4">
+                  {selectedChain.inputs.map((input, idx) => (
+                    <React.Fragment key={idx}>
+                      <div className="bg-slate-800 border border-slate-600 px-4 py-2 rounded-lg text-amber-500 font-bold text-center shadow-sm">
+                        {input}
+                      </div>
+                      {idx < selectedChain.inputs.length - 1 && (
+                        <span className="text-slate-600 font-bold text-xl">+</span>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
+
+                <ArrowRight className="w-8 h-8 text-slate-600 my-4" />
+
+                <div className={`${selectedChain.tier} border border-white/20 px-6 py-3 rounded-xl text-white font-bold text-lg text-center shadow-lg`}>
+                  {selectedChain.output}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <section className="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+                  <h3 className="flex items-center gap-2 text-lg text-amber-400 font-bold mb-3">
+                    <Combine className="w-5 h-5" /> Evolução de Métodos (PMs)
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    {selectedChain.pmEvolution}
+                  </p>
+                </section>
+
+                <section className="bg-slate-800/40 p-5 rounded-xl border border-slate-700/50">
+                  <h3 className="flex items-center gap-2 text-green-400 font-bold mb-3">
+                    <Factory className="w-5 h-5" /> Utilização Principal
+                  </h3>
+                  <p className="text-slate-300 text-sm leading-relaxed">
+                    {selectedChain.primaryUses}
+                  </p>
+                </section>
+              </div>
 
             </div>
           </div>
