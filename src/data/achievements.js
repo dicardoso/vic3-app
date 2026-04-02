@@ -450,7 +450,7 @@ export const initialAchievements = [
     strategy: 'Fique sob o guarda-chuva russo ou britânico. Industrialize pesado em carvão, ferro e petróleo (importado). Chegue rápido em tecnologia militar de cerco e construa fábricas de guerra focadas em blindados.',
     iconType: 'target'
   },
-  
+
   // --- EXPANSÃO LOTE 2: MAIS CONQUISTAS ---
   {
     id: 'berlin_conference',
@@ -632,7 +632,7 @@ export const initialAchievements = [
     strategy: 'Use a Grã-Bretanha e force aberturas de mercado, vassalagens e fantoches através do mundo todo usando a diplomacia das canhoneiras.',
     iconType: 'map'
   },
-  
+
   // --- EXPANSÃO LOTE 3: DLCs (Voice of the People, Colossus of the South) & Base Game ---
   {
     id: 'macau_my_day',
@@ -874,7 +874,7 @@ export const initialAchievements = [
     strategy: 'Jogue como a Grã-Bretanha. Inicie uma Jogada Diplomática contra a República de Piratini, o Império do Brasil ou nações africanas menores usando o objetivo de guerra de "Banir a Escravidão". Se eles não recuarem, vença a guerra.',
     iconType: 'users'
   },
-  
+
   // --- EXPANSÃO LOTE 4: DLCs Sphere of Influence & Desafios Finais ---
   {
     id: 'tupac_amaru',
@@ -1056,7 +1056,7 @@ export const initialAchievements = [
     strategy: 'Torna-se quase inevitável no final da campanha (décadas de 1910 a 1930) quando as redes de alianças e pactos defensivos estão interligadas. Inicie uma jogada diplomática exigindo o desmantelamento ou corte de um império rival para garantir que todos entram na escalada do conflito.',
     iconType: 'target'
   },
-  
+
   // --- EXPANSÃO LOTE 5: A ONDA FINAL (Últimas Atualizações, Desafios Extremos e Easter Eggs) ---
   {
     id: 'euphoric',
@@ -1537,5 +1537,79 @@ export const initialAchievements = [
     victoryCondition: 'Tropas militares ativas estacionadas e controlando o estado de Ile-de-France (se GB) ou as Ilhas Home (se FR).',
     strategy: 'A invasão naval de Londres é extremamente difícil devido à frota massiva britânica de encouraçados. Se jogar de França, gaste anos produzindo dezenas e dezenas de navios avançados (Dreadnoughts) e inicie uma invasão brutal pelo Canal da Mancha quando a frota inglesa estiver longe nas colônias.',
     iconType: 'target'
+  },
+
+  // --- CONQUISTAS ADICIONADAS POSTERIORMENTE ---
+  {
+    id: 'breadbasket',
+    name: 'Cesta de Pão (Breadbasket)',
+    description: 'Aprove a lei de Propriedades Rurais (Homesteading) e seja o maior produtor mundial de Grãos e Mantimentos.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Econômico',
+    startCondition: 'Nenhuma restrição.',
+    victoryCondition: 'Lei de Propriedades Rurais ativa e ser o 1º produtor global de Grãos e Mantimentos.',
+    strategy: 'Construa muitas Fazendas de Trigo/Milho/Centeio e Indústrias Alimentícias. A lei de Propriedades Rurais fortalece os Fazendeiros e reduz o poder dos Latifundiários. Jogue com uma nação populosa com muita terra arável, como os EUA, Rússia ou China.',
+    iconType: 'coins'
+  },
+  {
+    id: 'stonks',
+    name: 'Stonks',
+    description: 'Tenha três empresas com prosperidade máxima ao mesmo tempo.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Econômico',
+    startCondition: 'Nenhuma restrição.',
+    victoryCondition: 'Possuir 3 empresas estabelecidas ativas com prosperidade máxima simultaneamente.',
+    strategy: 'Escolha 3 empresas cujos edifícios-alvo você planeja construir massivamente (ex: siderúrgicas ou plantações). Construa e expanda esses edifícios de forma muito lucrativa (garanta matérias-primas baratas e alta demanda para as vendas) para aumentar a produtividade até atingir a prosperidade máxima.',
+    iconType: 'coins'
+  },
+  {
+    id: 'be_prepared',
+    name: 'Esteja Preparado! (Be Prepared!)',
+    description: 'Esteja preparado e evite uma fome durante um evento de colheita de alta intensidade.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Vários',
+    startCondition: 'Nenhuma restrição.',
+    victoryCondition: 'Evitar o estado de Fome durante um evento de crise agrícola severa.',
+    strategy: 'Mantenha um bom Padrão de Vida (SoL) e reservas ou acesso fácil a importações de alimentos básicos (Grãos, Peixe, Mantimentos). Quando o evento de má colheita aparecer, certifique-se de que as necessidades da sua população continuam sendo supridas pelas rotas de comércio.',
+    iconType: 'shield'
+  },
+  {
+    id: 'cosmopolitan',
+    name: 'Cosmopolita (Cosmopolitan)',
+    description: 'Tenha 10 culturas não-primárias presentes no seu país, e que todas as suas populações estejam em Aceitação Total.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Igualitário',
+    startCondition: 'Nenhuma restrição.',
+    victoryCondition: 'Possuir 10 culturas minoritárias diferentes vivendo no país sob o status de Aceitação Total.',
+    strategy: 'Jogue com um país atraente para imigração (como os EUA, Brasil ou Argentina) e que já inicie com algumas etnias diversas. Aprove a lei de Multiculturalismo o mais rápido possível para garantir Aceitação Total a todas as culturas do globo.',
+    iconType: 'users'
+  },
+  {
+    id: 'all_quiet_on_the_western_front',
+    name: 'Nada de Novo no Front (All Quiet on the Western Front)',
+    description: 'Sofra ou inflija mais de um milhão de baixas em uma única frente de batalha.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Militar',
+    startCondition: 'Nenhuma restrição.',
+    victoryCondition: 'O total de mortos e feridos em uma única frente militar superar 1.000.000 de soldados.',
+    strategy: 'Isto ocorrerá naturalmente em guerras colossais no fim de jogo (como nas trincheiras da Primeira Guerra Mundial). Envolva-se em uma guerra maciça com Grandes Potências (ex: França contra Alemanha) em uma fronteira unificada e trave combates de atrito prolongados com tecnologias defensivas de ponta.',
+    iconType: 'target'
+  },
+  {
+    id: 'unanimity',
+    name: 'Uma Oferta Irrecusável',
+    description: 'Começando com pelo menos dois Grupos de Interesse não-marginais se opondo a uma lei, remova toda a oposição para a aprovação dela.',
+    difficulty: 'Médio',
+    country: 'Qualquer',
+    objectiveType: 'Política',
+    startCondition: 'Iniciar a aprovação de uma lei com a oposição de dois Grupos de Interesse significativos.',
+    victoryCondition: 'Eliminar a oposição dos IGs originais antes da lei ser finalmente aprovada.',
+    strategy: 'Inicie a votação de uma lei polêmica. Use Agitadores para mudar a aprovação, aguarde por eventos de debate favoráveis, ou tente mudar a liderança dos IGs da oposição para líderes com ideologias neutras ou favoráveis em relação a essa lei, forçando-os a retirar a oposição.',
+    iconType: 'users'
   }
 ];

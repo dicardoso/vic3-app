@@ -16,6 +16,7 @@ import { getDifficultyKey } from '@/utils/helpers';
 import EconomyTab from '@/components/EconomyTab';
 import PoliticsTab from '@/components/PoliticsTab';
 import MilitaryTab from '@/components/MilitaryTab';
+import SteamSync from '@/components/SteamSync';
 export default function Vic3AchievementTracker() {
     const { dict, lang } = useDictionary();
 
@@ -30,6 +31,7 @@ export default function Vic3AchievementTracker() {
     const [filterType, setFilterType] = useState('All');
     const [groupBy, setGroupBy] = useState('none');
     const [hideCompleted, setHideCompleted] = useState(false);
+    const [showCompletedOnly, setShowCompletedOnly] = useState(false);
     const [selectedAchievement, setSelectedAchievement] = useState(null);
     const [isMounted, setIsMounted] = useState(false);
     
@@ -55,6 +57,23 @@ export default function Vic3AchievementTracker() {
             setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false })));
         }
     }, []);
+
+    const handleSteamSyncSuccess = (achievedIds) => {
+        setAchievements(prev => {
+            const updated = prev.map(ach => ({
+                ...ach,
+                completed: achievedIds.includes(ach.id)
+            }));
+
+            const saveState = updated.reduce((acc, ach) => {
+                if (ach.completed) acc[ach.id] = true;
+                return acc;
+            }, {});
+            localStorage.setItem('vic3_achievements_v2', JSON.stringify(saveState));
+            
+            return updated;
+        });
+    };
 
     const toggleCompletion = (id, event) => {
         if (event) event.stopPropagation();
@@ -96,11 +115,13 @@ export default function Vic3AchievementTracker() {
             const matchDiff = filterDifficulty === 'All' || ach.difficulty === filterDifficulty;
             const matchCountry = filterCountry === 'All' || ach.country === filterCountry;
             const matchType = filterType === 'All' || ach.objectiveType === filterType;
-            const matchStatus = hideCompleted ? !ach.completed : true;
+            let matchStatus = true;
+            if (hideCompleted) matchStatus = !ach.completed;
+            if (showCompletedOnly) matchStatus = ach.completed;
 
             return matchSearch && matchDiff && matchCountry && matchType && matchStatus;
         });
-    }, [achievements, searchTerm, filterDifficulty, filterCountry, filterType, hideCompleted]);
+    }, [achievements, searchTerm, filterDifficulty, filterCountry, filterType, hideCompleted, showCompletedOnly]);
 
     const groupedAchievements = useMemo(() => {
         if (groupBy === 'none') return { [dict.achievements.allAchievements]: filteredAchievements };
@@ -137,8 +158,8 @@ export default function Vic3AchievementTracker() {
                         <div className="flex items-center gap-4">
                             {isMounted && activeTab === 'achievements' && (
                                  <div className="flex flex-col items-end">
-                                     <span className="text-sm font-medium text-slate-300 mb-1">
-                                        {dict.header.progress}: {completedCount} / {totalCount} ({progressPercent}%)
+                                     <span className="text-sm font-semibold text-slate-300 mb-1">
+                                         {dict.header.progress}: {completedCount} / {totalCount} ({progressPercent}%)
                                      </span>
                                      <div className="w-full md:w-64 bg-slate-800 rounded-full h-2.5 overflow-hidden">
                                         <div
@@ -148,6 +169,7 @@ export default function Vic3AchievementTracker() {
                                     </div>
                                 </div>
                             )}
+                            <SteamSync dict={dict} onSyncSuccess={handleSteamSyncSuccess} />
                             <LanguageSwitcher />
                         </div>
                     </div>
@@ -278,16 +300,35 @@ export default function Vic3AchievementTracker() {
                                     </div>
                                 </div>
 
-                                <label className="relative inline-flex items-center cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        className="sr-only peer"
-                                        checked={hideCompleted}
-                                        onChange={() => setHideCompleted(!hideCompleted)}
-                                    />
-                                    <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
-                                    <span className="ml-3 text-sm font-medium text-slate-300">{dict.filters.hideCompleted}</span>
-                                </label>
+                                <div className="flex gap-4">
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            className="sr-only peer"
+                                            checked={hideCompleted}
+                                            onChange={() => {
+                                                setHideCompleted(!hideCompleted);
+                                                if (!hideCompleted) setShowCompletedOnly(false);
+                                            }}
+                                        />
+                                        <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                                        <span className="ml-3 text-sm font-medium text-slate-300">{dict.filters.hideCompleted}</span>
+                                    </label>
+
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            className="sr-only peer"
+                                            checked={showCompletedOnly}
+                                            onChange={() => {
+                                                setShowCompletedOnly(!showCompletedOnly);
+                                                if (!showCompletedOnly) setHideCompleted(false);
+                                            }}
+                                        />
+                                        <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                                        <span className="ml-3 text-sm font-medium text-slate-300">{dict.filters.showCompletedOnly}</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 

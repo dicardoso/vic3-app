@@ -50,7 +50,8 @@
     "allCountries": "Todos os Países",
     "anyDifficulty": "Qualquer Dif.",
     "allObjectiveTypes": "Todos os Tipos de Objetivo",
-    "hideCompleted": "Ocultar Completadas"
+    "hideCompleted": "Ocultar Completadas",
+    "showCompletedOnly": "Mostrar Conquistadas"
   },
   "difficulties": {
     "easy": "Fácil",
@@ -90,5 +91,14 @@
   "metadata": {
     "title": "Victoria 3 — Conquistas e Guias",
     "description": "Rastreador de conquistas e guias de estratégia para Victoria 3"
+  },
+  "steamSync": {
+    "placeholder": "Seu Steam ID (ex: 76561198297547087)",
+    "button": "Sincronizar Steam",
+    "syncing": "Sincronizando...",
+    "success": "Conquistas sincronizadas!",
+    "errorAuth": "Perfil privado ou não tem o jogo.",
+    "errorGeneric": "Erro na sincronização.",
+    "confirmSync": "Tem certeza? Isso irá redefinir seu progresso para corresponder exatamente ao perfil Steam, sobrescrevendo marcações manuais."
   }
 }

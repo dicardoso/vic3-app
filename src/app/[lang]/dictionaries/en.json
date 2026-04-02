@@ -50,7 +50,8 @@
     "allCountries": "All Countries",
     "anyDifficulty": "Any Difficulty",
     "allObjectiveTypes": "All Objective Types",
-    "hideCompleted": "Hide Completed"
+    "hideCompleted": "Hide Completed",
+    "showCompletedOnly": "Show Completed Only"
   },
   "difficulties": {
     "easy": "Easy",
@@ -90,5 +91,14 @@
   "metadata": {
     "title": "Victoria 3 — Achievements & Guides",
     "description": "Achievement tracker and strategy guides for Victoria 3"
+  },
+  "steamSync": {
+    "placeholder": "Your Steam ID (e.g. 76561198297547087)",
+    "button": "Sync with Steam",
+    "syncing": "Syncing...",
+    "success": "Achievements synced!",
+    "errorAuth": "Private profile or game not owned.",
+    "errorGeneric": "Sync error occurred.",
+    "confirmSync": "Are you sure? This will reset your progress to match your Steam profile exactly, overwriting any manual checkmarks."
   }
 }
