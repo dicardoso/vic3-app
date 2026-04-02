@@ -4,7 +4,8 @@ import {
   Map, Target, BookOpen, Star, AlertTriangle, 
   X, ChevronDown, Award, Globe, Shield, Coins, Users,
   Landmark, Swords, Navigation, Factory, TrendingUp, 
-  ArrowRight, Combine, Settings, DollarSign, Info, Pickaxe
+  ArrowRight, Combine, Settings, DollarSign, Info, Pickaxe,
+  Gavel, FileText, Crosshair, Tent, Skull, Flag, ArrowDown, ShieldAlert
 } from 'lucide-react';
 
 // --- BANCO DE DADOS DE CONQUISTAS (Expandido) ---
@@ -1674,7 +1675,7 @@ const countryGuides = [
   }
 ];
 
-// --- BANCO DE DADOS DE ECONOMIA E PRODUÇÃO (Expandido e Interativo) ---
+// --- BANCO DE DADOS DE ECONOMIA E PRODUÇÃO ---
 const macroConcepts = [
   {
     title: 'O Fundo de Investimento (Investment Pool)',
@@ -1773,9 +1774,114 @@ const productionChains = [
   }
 ];
 
+// --- BANCO DE DADOS DE POLÍTICA E LEIS (Novo) ---
+const politicsNodes = [
+  {
+    id: 'base_pops',
+    title: '1. População (POPs) e IGs',
+    icon: <Users className="w-6 h-6 text-indigo-400" />,
+    description: 'A base da sociedade. As Profissões, Riqueza e Alfabetização determinam a Consciência Política e a formação dos Grupos de Interesse (IGs).',
+    details: 'A População (POPs) é a origem de todo o poder. A combinação de Profissões (ex: Camponeses, Operários, Capitalistas), Riqueza e Alfabetização define a Consciência Política de um POP. A Riqueza gera Poder de Compra e Influência. Juntos, esses fatores determinam quais Grupos de Interesse (IGs) esses POPs irão formar e apoiar financeiramente.',
+    inputs: ['Profissões', 'Riqueza', 'Alfabetização'],
+    outputs: ['Consciência Política', 'Poder de Compra/Influência', 'Grupos de Interesse (IGs)'],
+    themeColor: 'text-indigo-400',
+    themeBg: 'bg-indigo-500/20',
+    themeBorder: 'border-indigo-500/30'
+  },
+  {
+    id: 'clout_gov',
+    title: '2. Clout (Poder Político) e Governo',
+    icon: <Landmark className="w-6 h-6 text-amber-400" />,
+    description: 'Os IGs convertem sua influência em Clout através das Regras de Votação, formando o Governo e gerando Legitimidade.',
+    details: 'Os Grupos de Interesse acumulam Poder Político (Clout) que é filtrado pelas "Leis Atuais" referentes à Distribuição de Poder (quem pode votar). O Clout dita a força de cada IG. Os IGs mais fortes geralmente compõem o "Governo Formado". A coesão ideológica deste Governo e o total de Clout que ele representa geram a sua Legitimidade.',
+    inputs: ['Grupos de Interesse (IGs)', 'Regras de Votação (Leis Atuais)'],
+    outputs: ['Poder Político (Clout)', 'Governo Formado', 'Legitimidade'],
+    themeColor: 'text-amber-400',
+    themeBg: 'bg-amber-500/20',
+    themeBorder: 'border-amber-500/30'
+  },
+  {
+    id: 'law_process',
+    title: '3. Proposta e Fases de Aprovação',
+    icon: <FileText className="w-6 h-6 text-blue-400" />,
+    description: 'O Governo propõe leis que passam por Fases de Aprovação. A Legitimidade afeta a chance de sucesso.',
+    details: 'Apenas o Governo Formado pode endossar uma "Proposta de Nova Lei". Ao ser proposta, a lei entra nas "Fases de Aprovação / Eventos". A velocidade de cada fase e as chances de Sucesso, Debate ou Estagnação dependem diretamente da Legitimidade do governo e da Compatibilidade Ideológica. Durante os eventos de aprovação, a reação dos IGs (apoio ou oposição) gera Radicais e Legalistas.',
+    inputs: ['Proposta de Nova Lei', 'Legitimidade', 'Compatibilidade Ideológica'],
+    outputs: ['Fases de Aprovação / Eventos', 'Radicais e Legalistas'],
+    themeColor: 'text-blue-400',
+    themeBg: 'bg-blue-500/20',
+    themeBorder: 'border-blue-500/30'
+  },
+  {
+    id: 'laws_institutions',
+    title: '4. Leis Atuais e Feedback Loop',
+    icon: <Gavel className="w-6 h-6 text-emerald-400" />,
+    description: 'Leis aprovadas afetam Regras de Votação, Instituições e criam um ciclo que altera a sociedade.',
+    details: 'Quando uma lei sobrevive às fases de aprovação, ela se torna parte das "Leis Atuais". Estas leis desbloqueiam ou limitam as "Instituições" de estado (Escolas, Hospitais, Polícia) e também determinam quanta Autoridade e Burocracia você gera ou consome. O ponto mais importante é o Feedback Loop: as Leis Atuais mudam a Estrutura Econômica e Social (ex: fim da escravidão, fim dos subsídios), o que altera diretamente a Riqueza e as Profissões dos POPs na base da pirâmide, reiniciando o ciclo político sob novas regras.',
+    inputs: ['Lei Aprovada (Fases concluídas)'],
+    outputs: ['Instituições', 'Geração/Consumo de Autoridade e Burocracia', 'Mudança na Estrutura Econômica (Feedback Loop para POPs)'],
+    themeColor: 'text-emerald-400',
+    themeBg: 'bg-emerald-500/20',
+    themeBorder: 'border-emerald-500/30'
+  }
+];
+
+// --- BANCO DE DADOS MILITAR E GUERRA (Novo) ---
+const militaryNodes = [
+  {
+    id: 'diplo_mob',
+    title: '1. Jogada Diplomática e Mobilização',
+    icon: <Flag className="w-6 h-6 text-orange-400" />,
+    description: 'O conflito se inicia na diplomacia. A escalada leva à Mobilização, ativando as tropas e disparando o consumo.',
+    details: 'Qualquer conflito em Victoria 3 começa com uma "Jogada Diplomática" (Diplomatic Play). Se as partes não chegarem a um acordo durante a fase de escalada, a guerra se aproxima e você aciona a "Mobilização". Mobilizar as tropas ativa suas formações militares e os direciona para as frentes, mas isso aumenta quase imediatamente e de forma drástica o consumo de Bens militares na economia.',
+    inputs: ['Jogada Diplomática (Escalada)'],
+    outputs: ['Mobilização Ativa', 'Aumento de Consumo de Bens'],
+    themeColor: 'text-orange-400',
+    themeBg: 'bg-orange-500/20',
+    themeBorder: 'border-orange-500/30'
+  },
+  {
+    id: 'barracks_supply',
+    title: '2. Suprimentos e Quartéis',
+    icon: <Tent className="w-6 h-6 text-green-400" />,
+    description: 'Bens e POPs alimentam os Quartéis e Bases Navais. A tecnologia define os atributos.',
+    details: 'Os Bens militares (Armas, Munição, Navios) são consumidos pelos "Quartéis e Bases Navais". Ao mesmo tempo, os POPs (Soldados e Oficiais) são empregados nestas estruturas físicas em seus estados. Em tempo de guerra e dependendo das suas leis, os "Centros de Recrutamento" podem levantar civis (conscrição) para engrossar as fileiras. A "Tecnologia Militar" que você pesquisou define os Métodos de Produção destas construções e seus atributos base.',
+    inputs: ['Bens (Armas, Munição, Navios)', 'POPs (Soldados, Oficiais)', 'Tecnologia Militar', 'Centros de Recrutamento (Leis)'],
+    outputs: ['Quartéis e Bases Navais Funcionais', 'Manutenção de Batalhões e Flotilhas'],
+    themeColor: 'text-green-400',
+    themeBg: 'bg-green-500/20',
+    themeBorder: 'border-green-500/30'
+  },
+  {
+    id: 'formations_battles',
+    title: '3. Formações e Batalhas',
+    icon: <Crosshair className="w-6 h-6 text-red-400" />,
+    description: 'Batalhões agrupados em Exércitos são comandados por Generais para resolver impasses nas Frentes de Batalha.',
+    details: 'Os Quartéis mantêm os "Batalhões e Flotilhas", que são então agrupados em "Formações: Exércitos e Frotas". Os "Generais e Almirantes" comandam estas formações e recebem ordens para avançar ou defender nas "Frentes de Batalha e Nodos Navais". O impasse territorial resulta em Batalhas. O poder ofensivo e defensivo da batalha é definido pela Tecnologia Militar combinada com as táticas e os bônus fornecidos pelos Comandantes.',
+    inputs: ['Batalhões e Flotilhas', 'Generais e Almirantes', 'Frentes de Batalha / Nodos Navais'],
+    outputs: ['Resolução de Batalhas', 'Ocupação de Território (Vitória)', 'Mortos e Feridos'],
+    themeColor: 'text-red-400',
+    themeBg: 'bg-red-500/20',
+    themeBorder: 'border-red-500/30'
+  },
+  {
+    id: 'war_exhaustion',
+    title: '4. Exaustão de Guerra e Resolução',
+    icon: <Skull className="w-6 h-6 text-purple-400" />,
+    description: 'Baixas e Ocupações punem a Exaustão de Guerra até forçar a Capitulação. Cria um forte Feedback Loop.',
+    details: 'As batalhas deixam duas grandes cicatrizes: "Ocupação de Território" pelo vencedor e um número substancial de "Mortos, Feridos e Dependentes" de ambos os lados. Estes fatores punem a sua moral, aumentando a penalidade de "Exaustão de Guerra" semanalmente. Quando a Exaustão atinge seu limite (100%), o país é forçado à Capitulação ou a aceitar um Tratado de Paz. Além disso, as baixas ativam um Feedback Loop perigoso: reduzem a População Ativa da sua economia e o luto aumenta o número de Radicais no país.',
+    inputs: ['Ocupação de Território (Inimigo)', 'Mortos, Feridos e Dependentes'],
+    outputs: ['Penalidade de Exaustão de Guerra', 'Capitulação / Tratado de Paz', 'Redução de POPs e Aumento de Radicais (Feedback Loop)'],
+    themeColor: 'text-purple-400',
+    themeBg: 'bg-purple-500/20',
+    themeBorder: 'border-purple-500/30'
+  }
+];
+
+
 export default function Vic3AchievementTracker() {
   // --- STATES ---
-  const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides' | 'economy'
+  const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides' | 'economy' | 'politics' | 'military'
   
   // Achievement States
   const [achievements, setAchievements] = useState([]);
@@ -1787,12 +1893,12 @@ export default function Vic3AchievementTracker() {
   const [hideCompleted, setHideCompleted] = useState(false);
   const [selectedAchievement, setSelectedAchievement] = useState(null);
   
-  // Guide States
+  // Modals States
   const [selectedGuide, setSelectedGuide] = useState(null);
-
-  // Economy States
   const [selectedMacro, setSelectedMacro] = useState(null);
   const [selectedChain, setSelectedChain] = useState(null);
+  const [selectedPoliticsNode, setSelectedPoliticsNode] = useState(null);
+  const [selectedMilitaryNode, setSelectedMilitaryNode] = useState(null);
 
   // --- LOCAL STORAGE SYNC ---
   useEffect(() => {
@@ -1918,10 +2024,10 @@ export default function Vic3AchievementTracker() {
           </div>
 
           {/* NAVEGAÇÃO / TABS */}
-          <div className="flex space-x-8 mt-6">
+          <div className="flex space-x-6 mt-6 overflow-x-auto pb-1 scrollbar-hide">
             <button 
               onClick={() => setActiveTab('achievements')}
-              className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 whitespace-nowrap ${
                 activeTab === 'achievements' 
                 ? 'border-amber-500 text-amber-500' 
                 : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
@@ -1931,23 +2037,43 @@ export default function Vic3AchievementTracker() {
             </button>
             <button 
               onClick={() => setActiveTab('guides')}
-              className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 whitespace-nowrap ${
                 activeTab === 'guides' 
                 ? 'border-amber-500 text-amber-500' 
                 : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
               }`}
             >
-              <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guias de Países Principais</div>
+              <div className="flex items-center gap-2"><BookOpen className="w-4 h-4" /> Guias de Países</div>
             </button>
             <button 
               onClick={() => setActiveTab('economy')}
-              className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 whitespace-nowrap ${
                 activeTab === 'economy' 
                 ? 'border-amber-500 text-amber-500' 
                 : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
               }`}
             >
               <div className="flex items-center gap-2"><Factory className="w-4 h-4" /> Economia e Indústria</div>
+            </button>
+            <button 
+              onClick={() => setActiveTab('politics')}
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 whitespace-nowrap ${
+                activeTab === 'politics' 
+                ? 'border-amber-500 text-amber-500' 
+                : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+              }`}
+            >
+              <div className="flex items-center gap-2"><Gavel className="w-4 h-4" /> Política e Leis</div>
+            </button>
+            <button 
+              onClick={() => setActiveTab('military')}
+              className={`pb-3 border-b-2 font-medium transition-colors duration-200 whitespace-nowrap ${
+                activeTab === 'military' 
+                ? 'border-amber-500 text-amber-500' 
+                : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+              }`}
+            >
+              <div className="flex items-center gap-2"><Crosshair className="w-4 h-4" /> Sistema Militar</div>
             </button>
           </div>
         </div>
@@ -2263,6 +2389,122 @@ export default function Vic3AchievementTracker() {
               </div>
             </div>
             
+          </div>
+        )}
+
+        {/* ========================================= */}
+        {/* ABA 4: POLÍTICA E LEIS                    */}
+        {/* ========================================= */}
+        {activeTab === 'politics' && (
+          <div className="space-y-8">
+            <div className="mb-8 border-b border-slate-800 pb-8">
+              <h2 className="text-3xl font-bold text-white mb-3">O Sistema Político e a Aprovação de Leis</h2>
+              <p className="text-slate-400 max-w-4xl leading-relaxed">
+                A política no jogo é um ciclo contínuo. As características da sua População ditam quais Grupos de Interesse (IGs) têm poder. Por sua vez, esses grupos formam o Governo, propõem e aprovam Leis. Essas Leis, quando ativas, mudam a estrutura econômica e social do país, alterando as condições da base populacional novamente através de um poderoso <strong>Feedback Loop</strong>.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 relative">
+              {/* Linha vertical conectando os cards */}
+              <div className="absolute left-8 md:left-1/2 top-4 bottom-4 w-1 bg-slate-800 -z-10 rounded-full hidden md:block"></div>
+
+              {politicsNodes.map((node, i) => (
+                <React.Fragment key={i}>
+                  <div 
+                    onClick={() => setSelectedPoliticsNode(node)}
+                    className={`bg-slate-800 border border-slate-700 p-6 rounded-xl shadow-md cursor-pointer hover:-translate-y-1 transition-all group ${node.themeBorder.replace('border-', 'hover:border-')}`}
+                  >
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                      <div className={`p-4 rounded-full ${node.themeBg} ${node.themeBorder} border flex-shrink-0 mx-auto md:mx-0`}>
+                        {node.icon}
+                      </div>
+                      <div className="flex-grow text-center md:text-left">
+                        <h3 className={`text-xl font-bold text-white mb-2`}>{node.title}</h3>
+                        <p className="text-slate-300 text-sm leading-relaxed">{node.description}</p>
+                      </div>
+                      <div className="hidden md:flex flex-col items-center justify-center min-w-[120px] text-xs font-semibold text-slate-500 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
+                        Ver Fluxo
+                        <ArrowRight className="w-5 h-5 mt-1" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Seta para baixo entre os cartões */}
+                  {i < politicsNodes.length - 1 && (
+                    <div className="flex justify-center -my-2 text-slate-600">
+                      <ArrowDown className="w-8 h-8" />
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            <div className="mt-8 p-5 bg-indigo-900/20 border border-indigo-800/30 rounded-xl">
+              <h4 className="text-lg font-bold text-indigo-400 flex items-center gap-2 mb-2">
+                <ShieldAlert className="w-5 h-5" /> Entendendo a Legitimidade
+              </h4>
+              <p className="text-sm text-indigo-200/80 leading-relaxed">
+                A Legitimidade do seu governo dita o quão rápido você consegue aprovar leis (Fases de Aprovação). Colocar IGs no governo que se odeiam (incompatibilidade ideológica) ou colocar IGs fracos sem apoio da Lei de Votação atual fará sua Legitimidade despencar, estagnando o país e gerando Radicais passivamente.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================= */}
+        {/* ABA 5: SISTEMA MILITAR E GUERRA           */}
+        {/* ========================================= */}
+        {activeTab === 'military' && (
+          <div className="space-y-8">
+            <div className="mb-8 border-b border-slate-800 pb-8">
+              <h2 className="text-3xl font-bold text-white mb-3">A Máquina de Guerra e Logística Militar</h2>
+              <p className="text-slate-400 max-w-4xl leading-relaxed">
+                A guerra nunca ocorre no vácuo. Ela começa na diplomacia e escala para a Mobilização, exigindo enormes quantidades de bens da sua economia. O sistema não se baseia em microgerenciar tropas no mapa, mas sim em garantir que a sua cadeia de suprimentos sustente os Batalhões nas Frentes de Batalha antes que o país sucumba à <strong>Exaustão de Guerra</strong>.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 relative">
+              {/* Linha vertical conectando os cards */}
+              <div className="absolute left-8 md:left-1/2 top-4 bottom-4 w-1 bg-slate-800 -z-10 rounded-full hidden md:block"></div>
+
+              {militaryNodes.map((node, i) => (
+                <React.Fragment key={i}>
+                  <div 
+                    onClick={() => setSelectedMilitaryNode(node)}
+                    className={`bg-slate-800 border border-slate-700 p-6 rounded-xl shadow-md cursor-pointer hover:-translate-y-1 transition-all group ${node.themeBorder.replace('border-', 'hover:border-')}`}
+                  >
+                    <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
+                      <div className={`p-4 rounded-full ${node.themeBg} ${node.themeBorder} border flex-shrink-0 mx-auto md:mx-0`}>
+                        {node.icon}
+                      </div>
+                      <div className="flex-grow text-center md:text-left">
+                        <h3 className={`text-xl font-bold text-white mb-2`}>{node.title}</h3>
+                        <p className="text-slate-300 text-sm leading-relaxed">{node.description}</p>
+                      </div>
+                      <div className="hidden md:flex flex-col items-center justify-center min-w-[120px] text-xs font-semibold text-slate-500 uppercase tracking-widest group-hover:text-amber-500 transition-colors">
+                        Detalhes
+                        <ArrowRight className="w-5 h-5 mt-1" />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Seta para baixo entre os cartões */}
+                  {i < militaryNodes.length - 1 && (
+                    <div className="flex justify-center -my-2 text-slate-600">
+                      <ArrowDown className="w-8 h-8" />
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+
+            <div className="mt-8 p-5 bg-red-900/20 border border-red-800/30 rounded-xl">
+              <h4 className="text-lg font-bold text-red-400 flex items-center gap-2 mb-2">
+                <Skull className="w-5 h-5" /> O Custo Oculto da Guerra
+              </h4>
+              <p className="text-sm text-red-200/80 leading-relaxed">
+                Guerras prolongadas geram Mortos e Feridos. Além de aumentar a Exaustão de Guerra em direção à capitulação, essas baixas ativam um terrível <strong>Feedback Loop</strong>: a sua População Ativa (trabalhadores) desaparece, gerando dependentes, e o luto da nação aumenta maciçamente o número de Radicais internos, o que pode engatilhar uma guerra civil logo após o fim da guerra internacional.
+              </p>
+            </div>
           </div>
         )}
       </main>
@@ -2585,6 +2827,170 @@ export default function Vic3AchievementTracker() {
                 </section>
               </div>
 
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================= */}
+      {/* MODAL: POLÍTICA E LEIS (FLUXOGRAMA)       */}
+      {/* ========================================= */}
+      {selectedPoliticsNode && activeTab === 'politics' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedPoliticsNode(null)}>
+          <div 
+            className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/50"
+            onClick={e => e.stopPropagation()} 
+          >
+            <div className={`sticky top-0 bg-slate-900/95 backdrop-blur z-10 p-6 border-b border-slate-800 flex justify-between items-start relative overflow-hidden`}>
+              <div className="flex items-center gap-4 relative z-10">
+                <div className={`p-3 rounded-xl shadow-sm border ${selectedPoliticsNode.themeBg} ${selectedPoliticsNode.themeBorder}`}>
+                  {selectedPoliticsNode.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-1">{selectedPoliticsNode.title}</h2>
+                  <span className={`text-xs uppercase tracking-wider font-semibold ${selectedPoliticsNode.themeColor}`}>
+                    Nó do Fluxograma Político
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setSelectedPoliticsNode(null)}
+                className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-400 hover:text-white transition-colors relative z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 md:p-8 space-y-8">
+              <section>
+                <h3 className="text-sm uppercase tracking-widest text-slate-500 font-semibold mb-2">O que acontece nesta etapa</h3>
+                <p className="text-lg text-slate-300 leading-relaxed">{selectedPoliticsNode.details}</p>
+              </section>
+
+              {/* Tabela de Inputs e Outputs */}
+              <div className="bg-slate-950 p-6 rounded-xl border border-slate-800 shadow-inner grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                
+                {/* Entradas */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <ArrowDown className="w-5 h-5 text-slate-500" />
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Requerimentos (Inputs)</h4>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {selectedPoliticsNode.inputs.map((input, idx) => (
+                      <div key={idx} className="bg-slate-800 border border-slate-700 px-4 py-2.5 rounded-lg text-slate-300 text-sm font-medium shadow-sm flex items-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-slate-500 mr-3"></div>
+                        {input}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Divisor Visual para Desktop */}
+                <div className="hidden md:flex absolute inset-y-6 left-1/2 w-px bg-slate-800">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-950 p-2 text-slate-600">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+
+                {/* Saídas */}
+                <div>
+                  <div className="flex items-center justify-end md:justify-start gap-2 mb-4">
+                    <h4 className={`text-sm font-bold uppercase tracking-widest ${selectedPoliticsNode.themeColor}`}>Gerações (Outputs)</h4>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {selectedPoliticsNode.outputs.map((output, idx) => (
+                      <div key={idx} className={`bg-slate-800 border px-4 py-2.5 rounded-lg text-white text-sm font-medium shadow-sm flex items-center ${selectedPoliticsNode.themeBorder}`}>
+                        <div className={`w-1.5 h-1.5 rounded-full mr-3 ${selectedPoliticsNode.themeBg.replace('/20', '')}`}></div>
+                        {output}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ========================================= */}
+      {/* MODAL: MILITAR E GUERRA (FLUXOGRAMA)      */}
+      {/* ========================================= */}
+      {selectedMilitaryNode && activeTab === 'military' && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onClick={() => setSelectedMilitaryNode(null)}>
+          <div 
+            className="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl shadow-black/50"
+            onClick={e => e.stopPropagation()} 
+          >
+            <div className={`sticky top-0 bg-slate-900/95 backdrop-blur z-10 p-6 border-b border-slate-800 flex justify-between items-start relative overflow-hidden`}>
+              <div className="flex items-center gap-4 relative z-10">
+                <div className={`p-3 rounded-xl shadow-sm border ${selectedMilitaryNode.themeBg} ${selectedMilitaryNode.themeBorder}`}>
+                  {selectedMilitaryNode.icon}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-white mb-1">{selectedMilitaryNode.title}</h2>
+                  <span className={`text-xs uppercase tracking-wider font-semibold ${selectedMilitaryNode.themeColor}`}>
+                    Nó do Fluxograma Militar
+                  </span>
+                </div>
+              </div>
+              <button 
+                onClick={() => setSelectedMilitaryNode(null)}
+                className="p-2 bg-slate-800 hover:bg-slate-700 rounded-full text-slate-400 hover:text-white transition-colors relative z-10"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="p-6 md:p-8 space-y-8">
+              <section>
+                <h3 className="text-sm uppercase tracking-widest text-slate-500 font-semibold mb-2">O que acontece nesta etapa</h3>
+                <p className="text-lg text-slate-300 leading-relaxed">{selectedMilitaryNode.details}</p>
+              </section>
+
+              {/* Tabela de Inputs e Outputs */}
+              <div className="bg-slate-950 p-6 rounded-xl border border-slate-800 shadow-inner grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+                
+                {/* Entradas */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <ArrowDown className="w-5 h-5 text-slate-500" />
+                    <h4 className="text-sm font-bold text-slate-400 uppercase tracking-widest">Requerimentos (Inputs)</h4>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {selectedMilitaryNode.inputs.map((input, idx) => (
+                      <div key={idx} className="bg-slate-800 border border-slate-700 px-4 py-2.5 rounded-lg text-slate-300 text-sm font-medium shadow-sm flex items-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-slate-500 mr-3"></div>
+                        {input}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Divisor Visual para Desktop */}
+                <div className="hidden md:flex absolute inset-y-6 left-1/2 w-px bg-slate-800">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-950 p-2 text-slate-600">
+                    <ArrowRight className="w-5 h-5" />
+                  </div>
+                </div>
+
+                {/* Saídas */}
+                <div>
+                  <div className="flex items-center justify-end md:justify-start gap-2 mb-4">
+                    <h4 className={`text-sm font-bold uppercase tracking-widest ${selectedMilitaryNode.themeColor}`}>Gerações (Outputs)</h4>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    {selectedMilitaryNode.outputs.map((output, idx) => (
+                      <div key={idx} className={`bg-slate-800 border px-4 py-2.5 rounded-lg text-white text-sm font-medium shadow-sm flex items-center ${selectedMilitaryNode.themeBorder}`}>
+                        <div className={`w-1.5 h-1.5 rounded-full mr-3 ${selectedMilitaryNode.themeBg.replace('/20', '')}`}></div>
+                        {output}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory } from 'lucide-react';
+import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory, Landmark, Swords } from 'lucide-react';
 
 import { initialAchievements } from '@/data/achievements';
 import { countryGuides } from '@/data/guides';
@@ -14,7 +14,8 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useDictionary } from '@/components/DictionaryContext';
 import { getDifficultyKey } from '@/utils/helpers';
 import EconomyTab from '@/components/EconomyTab';
-
+import PoliticsTab from '@/components/PoliticsTab';
+import MilitaryTab from '@/components/MilitaryTab';
 export default function Vic3AchievementTracker() {
     const { dict, lang } = useDictionary();
 
@@ -182,6 +183,26 @@ export default function Vic3AchievementTracker() {
                         >
                         <div className="flex items-center gap-2"><Factory className="w-4 h-4" /> {dict.header.tabs.economy}</div>
                         </button>
+                        <button 
+                        onClick={() => setActiveTab('politics')}
+                        className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+                            activeTab === 'politics' 
+                            ? 'border-amber-500 text-amber-500' 
+                            : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                        }`}
+                        >
+                        <div className="flex items-center gap-2"><Landmark className="w-4 h-4" /> {dict.header.tabs.politics}</div>
+                        </button>
+                        <button 
+                        onClick={() => setActiveTab('military')}
+                        className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+                            activeTab === 'military' 
+                            ? 'border-amber-500 text-amber-500' 
+                            : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                        }`}
+                        >
+                        <div className="flex items-center gap-2"><Swords className="w-4 h-4" /> {dict.header.tabs.military}</div>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -327,6 +348,14 @@ export default function Vic3AchievementTracker() {
 
                 {activeTab === 'economy' && (
                     <EconomyTab />
+                )}
+
+                {activeTab === 'politics' && (
+                    <PoliticsTab />
+                )}
+
+                {activeTab === 'military' && (
+                    <MilitaryTab />
                 )}
             </main>
 

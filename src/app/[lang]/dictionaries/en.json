@@ -5,7 +5,9 @@
     "tabs": {
       "achievements": "Achievement List",
       "guides": "Main Country Guides",
-      "economy": "Economy & Industry"
+      "economy": "Economy & Industry",
+      "politics": "Politics & Laws",
+      "military": "Military System"
     }
   },
   "economy": {
@@ -19,6 +21,25 @@
     "pmTipTitle": "Production Methods (PMs) Tip",
     "pmTipDescription": "Whenever you unlock a new technology that changes the production method, check the local tabs (F3 in-game). Changing everything at once without having the intermediate resources ready in your market will cause prices to skyrocket.",
     "close": "Close"
+  },
+  "politics": {
+    "title": "Politics and Laws",
+    "description": "Politics in the game is a continuous cycle. The characteristics of your Population dictate which Interest Groups (IGs) hold power. In turn, these groups form the Government, propose and pass Laws. These Laws, when active, change the economic and social structure of the country, altering the conditions of the population base again through a powerful Feedback Loop.",
+    "understandingLegitimacy": "Understanding Legitimacy",
+    "legitimacyDescription": "Your government's Legitimacy dictates how quickly you can pass laws (Approval Phases). Putting IGs in government that hate each other (ideological incompatibility) or putting weak IGs without the support of the current Voting Law will cause your Legitimacy to plummet, stagnating the country and generating Radicals passively.",
+    "viewFlow": "View Flow",
+    "nodeModalSubtitle": "Political Flowchart Node",
+    "processPhase": "What happens in this stage",
+    "requires": "Requirements (Inputs)",
+    "generates": "Generates (Outputs)"
+  },
+  "military": {
+    "title": "Military System",
+    "description": "War never occurs in a vacuum. It begins in diplomacy and escalates to Mobilization, demanding enormous amounts of goods from your economy. The system is not based on micromanaging troops on the map, but on ensuring that your supply chain sustains the Battalions on the Frontlines before the country succumbs to War Exhaustion.",
+    "hiddenCost": "The Hidden Cost of War",
+    "costDescription": "Prolonged wars generate Dead and Wounded. Besides increasing War Exhaustion towards capitulation, these casualties trigger a terrible Feedback Loop: your Active Population (workers) disappears, creating dependents, and the nation's mourning massively increases the number of internal Radicals, which can trigger a civil war right after the end of the international war.",
+    "details": "Details",
+    "nodeModalSubtitle": "Military Flowchart Node"
   },
   "filters": {
     "searchPlaceholder": "Search achievement, country or condition...",

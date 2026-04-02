@@ -5,7 +5,9 @@
     "tabs": {
       "achievements": "Lista de Conquistas",
       "guides": "Guias de Países Principais",
-      "economy": "Economia e Indústria"
+      "economy": "Economia e Indústria",
+      "politics": "Política e Leis",
+      "military": "Sistema Militar"
     }
   },
   "economy": {
@@ -19,6 +21,25 @@
     "pmTipTitle": "Dica de Métodos de Produção (PMs)",
     "pmTipDescription": "Sempre que desbloquear uma nova tecnologia que altera a forma de produção, verifique as abas locais (F3 no jogo). Trocar tudo de uma vez sem ter os recursos intermediários prontos no seu mercado fará os preços dispararem.",
     "close": "Fechar"
+  },
+  "politics": {
+    "title": "Política e Leis",
+    "description": "A política no jogo é um ciclo contínuo. As características da sua População ditam quais Grupos de Interesse (IGs) têm poder. Por sua vez, esses grupos formam o Governo, propõem e aprovam Leis. Essas Leis, quando ativas, mudam a estrutura econômica e social do país, alterando as condições da base populacional novamente através de um poderoso Feedback Loop.",
+    "understandingLegitimacy": "Entendendo a Legitimidade",
+    "legitimacyDescription": "A Legitimidade do seu governo dita o quão rápido você consegue aprovar leis (Fases de Aprovação). Colocar IGs no governo que se odeiam (incompatibilidade ideológica) ou colocar IGs fracos sem apoio da Lei de Votação atual fará sua Legitimidade despencar, estagnando o país e gerando Radicais passivamente.",
+    "viewFlow": "Ver Fluxo",
+    "nodeModalSubtitle": "Nó do Fluxograma Político",
+    "processPhase": "O que acontece nesta etapa",
+    "requires": "Requerimentos (Inputs)",
+    "generates": "Gerações (Outputs)"
+  },
+  "military": {
+    "title": "Sistema Militar",
+    "description": "A guerra nunca ocorre no vácuo. Ela começa na diplomacia e escala para a Mobilização, exigindo enormes quantidades de bens da sua economia. O sistema não se baseia em microgerenciar tropas no mapa, mas sim em garantir que a sua cadeia de suprimentos sustente os Batalhões nas Frentes de Batalha antes que o país sucumba à Exaustão de Guerra.",
+    "hiddenCost": "O Custo Oculto da Guerra",
+    "costDescription": "Guerras prolongadas geram Mortos e Feridos. Além de aumentar a Exaustão de Guerra em direção à capitulação, essas baixas ativam um terrível Feedback Loop: a sua População Ativa (trabalhadores) desaparece, gerando dependentes, e o luto da nação aumenta maciçamente o número de Radicais internos, o que pode engatilhar uma guerra civil logo após o fim da guerra internacional.",
+    "details": "Detalhes",
+    "nodeModalSubtitle": "Nó do Fluxograma Militar"
   },
   "filters": {
     "searchPlaceholder": "Buscar conquista, país ou condição...",
