@@ -7,7 +7,8 @@
       "guides": "Main Country Guides",
       "economy": "Economy & Industry",
       "politics": "Politics & Laws",
-      "military": "Military System"
+      "military": "Military System",
+      "map": "Treasure Map"
     }
   },
   "economy": {
@@ -40,6 +41,16 @@
     "costDescription": "Prolonged wars generate Dead and Wounded. Besides increasing War Exhaustion towards capitulation, these casualties trigger a terrible Feedback Loop: your Active Population (workers) disappears, creating dependents, and the nation's mourning massively increases the number of internal Radicals, which can trigger a civil war right after the end of the international war.",
     "details": "Details",
     "nodeModalSubtitle": "Military Flowchart Node"
+  },
+  "map": {
+    "title": "Campaign Routes and Combos",
+    "description": "Many Victoria 3 achievements perfectly complement each other if executed in the same run. Select one of our Treasure Maps below to reveal a step-by-step flowchart on how to orchestrate impressive combos and achieve quick glory.",
+    "inspectRoute": "Inspect Route",
+    "backToMaps": "Back to Maps",
+    "step": "Step",
+    "readGuide": "Read Guide",
+    "option": "Option",
+    "endOfCampaign": "End of Campaign"
   },
   "filters": {
     "searchPlaceholder": "Search achievement, country or condition...",

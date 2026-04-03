@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from 'react';
-import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory, Landmark, Swords } from 'lucide-react';
+import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory, Landmark, Swords, Compass } from 'lucide-react';
 
 import { initialAchievements } from '@/data/achievements';
 import { countryGuides } from '@/data/guides';
@@ -16,6 +16,7 @@ import { getDifficultyKey } from '@/utils/helpers';
 import EconomyTab from '@/components/EconomyTab';
 import PoliticsTab from '@/components/PoliticsTab';
 import MilitaryTab from '@/components/MilitaryTab';
+import MapTab from '@/components/MapTab';
 import SteamSync from '@/components/SteamSync';
 export default function Vic3AchievementTracker() {
     const { dict, lang } = useDictionary();
@@ -225,6 +226,16 @@ export default function Vic3AchievementTracker() {
                         >
                         <div className="flex items-center gap-2"><Swords className="w-4 h-4" /> {dict.header.tabs.military}</div>
                         </button>
+                        <button 
+                        onClick={() => setActiveTab('map')}
+                        className={`pb-3 border-b-2 font-medium transition-colors duration-200 ${
+                            activeTab === 'map' 
+                            ? 'border-amber-500 text-amber-500' 
+                            : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-600'
+                        }`}
+                        >
+                        <div className="flex items-center gap-2"><Compass className="w-4 h-4" /> {dict.header.tabs.map}</div>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -397,6 +408,10 @@ export default function Vic3AchievementTracker() {
 
                 {activeTab === 'military' && (
                     <MilitaryTab />
+                )}
+
+                {activeTab === 'map' && (
+                    <MapTab achievements={achievements} onSelectAchievement={setSelectedAchievement} />
                 )}
             </main>
 
