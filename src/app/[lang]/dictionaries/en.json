@@ -104,7 +104,7 @@
     "description": "Achievement tracker and strategy guides for Victoria 3"
   },
   "steamSync": {
-    "placeholder": "Your Steam ID (e.g. 76561198297547087)",
+    "placeholder": "Your Steam ID (e.g. xxxxxxxxxxxxxxxxx)",
     "button": "Sync with Steam",
     "syncing": "Syncing...",
     "success": "Achievements synced!",
