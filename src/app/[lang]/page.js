@@ -3,8 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Search, Filter, AlertTriangle, Globe, Trophy, BookOpen, Factory, Landmark, Swords, Compass } from 'lucide-react';
 
-import { initialAchievements } from '@/data/achievements';
-import { countryGuides } from '@/data/guides';
+import { getAchievementsData, getGuidesData } from '@/data';
 
 import AchievementCard from '@/components/AchievementCard';
 import AchievementModal from '@/components/AchievementModal';
@@ -20,6 +19,8 @@ import MapTab from '@/components/MapTab';
 import SteamSync from '@/components/SteamSync';
 export default function Vic3AchievementTracker() {
     const { dict, lang } = useDictionary();
+    const initialAchievements = useMemo(() => getAchievementsData(lang), [lang]);
+    const countryGuides = useMemo(() => getGuidesData(lang), [lang]);
 
     // --- TABS ---
     const [activeTab, setActiveTab] = useState('achievements'); // 'achievements' | 'guides'
@@ -57,7 +58,7 @@ export default function Vic3AchievementTracker() {
         } else {
             setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false })));
         }
-    }, []);
+    }, [initialAchievements]);
 
     const handleSteamSyncSuccess = (achievedIds) => {
         setAchievements(prev => {
@@ -100,8 +101,8 @@ export default function Vic3AchievementTracker() {
 
     // Internal difficulty keys used in data
     const difficultyKeys = ['Fácil', 'Médio', 'Difícil', 'Muito Difícil'];
-    const countries = ['All', ...new Set(initialAchievements.map(a => a.country))].sort();
-    const types = ['All', ...new Set(initialAchievements.map(a => a.objectiveType))].sort();
+    const countries = useMemo(() => ['All', ...new Set(initialAchievements.map(a => a.country))].sort(), [initialAchievements]);
+    const types = useMemo(() => ['All', ...new Set(initialAchievements.map(a => a.objectiveType))].sort(), [initialAchievements]);
 
     // Translate difficulty from internal key to display label
     function translateDifficulty(internalValue) {

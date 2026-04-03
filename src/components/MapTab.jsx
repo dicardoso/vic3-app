@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Route, Flag, ArrowRight, Footprints, GitMerge } from 'lucide-react';
-import { treasureMaps } from '@/data/maps';
+import { getMapsData } from '@/data';
 import { useDictionary } from './DictionaryContext';
 import IconMapper from './IconMapper';
 import { getDifficultyKey } from '@/utils/helpers';
 
 export default function MapTab({ achievements, onSelectAchievement }) {
-    const { dict } = useDictionary();
+    const { dict, lang } = useDictionary();
+    const treasureMaps = getMapsData(lang);
     const [selectedMapRoute, setSelectedMapRoute] = useState(null);
 
     // --- HELPER FUNCTION FOR MAP ---

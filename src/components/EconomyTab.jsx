@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Settings } from 'lucide-react';
-import { macroConcepts, productionChains } from '@/data/economy';
+import { getEconomyData } from '@/data';
 import MacroConceptCard from './MacroConceptCard';
 import ProductionChainCard from './ProductionChainCard';
 import MacroConceptModal from './MacroConceptModal';
@@ -8,7 +8,8 @@ import ProductionChainModal from './ProductionChainModal';
 import { useDictionary } from './DictionaryContext';
 
 export default function EconomyTab() {
-    const { dict } = useDictionary();
+    const { dict, lang } = useDictionary();
+    const { macroConcepts, productionChains } = getEconomyData(lang);
     const [selectedMacro, setSelectedMacro] = useState(null);
     const [selectedChain, setSelectedChain] = useState(null);
 

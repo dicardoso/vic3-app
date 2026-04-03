@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ShieldAlert, ArrowRight, ArrowDown, X } from 'lucide-react';
-import { politicsNodes } from '@/data/politics';
+import { getPoliticsData } from '@/data';
 import { useDictionary } from './DictionaryContext';
 
 export default function PoliticsTab() {
-  const { dict } = useDictionary();
+  const { dict, lang } = useDictionary();
+  const politicsNodes = getPoliticsData(lang);
   const [selectedPoliticsNode, setSelectedPoliticsNode] = useState(null);
 
   return (

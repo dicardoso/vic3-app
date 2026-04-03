@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Skull, ArrowRight, ArrowDown, X } from 'lucide-react';
-import { militaryNodes } from '@/data/military';
+import { getMilitaryData } from '@/data';
 import { useDictionary } from './DictionaryContext';
 
 export default function MilitaryTab() {
-  const { dict } = useDictionary();
+  const { dict, lang } = useDictionary();
+  const militaryNodes = getMilitaryData(lang);
   const [selectedMilitaryNode, setSelectedMilitaryNode] = useState(null);
 
   return (
