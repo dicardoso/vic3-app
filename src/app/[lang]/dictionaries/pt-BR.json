@@ -110,6 +110,7 @@
     "success": "Conquistas sincronizadas!",
     "errorAuth": "Perfil privado ou não tem o jogo.",
     "errorGeneric": "Erro na sincronização.",
-    "confirmSync": "Tem certeza? Isso irá redefinir seu progresso para corresponder exatamente ao perfil Steam, sobrescrevendo marcações manuais."
+    "confirmSync": "Tem certeza? Isso irá redefinir seu progresso para corresponder exatamente ao perfil Steam, sobrescrevendo marcações manuais.",
+    "whereToFindId": "Onde encontro meu Steam ID?"
   }
 }

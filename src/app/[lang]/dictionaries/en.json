@@ -110,6 +110,7 @@
     "success": "Achievements synced!",
     "errorAuth": "Private profile or game not owned.",
     "errorGeneric": "Sync error occurred.",
-    "confirmSync": "Are you sure? This will reset your progress to match your Steam profile exactly, overwriting any manual checkmarks."
+    "confirmSync": "Are you sure? This will reset your progress to match your Steam profile exactly, overwriting any manual checkmarks.",
+    "whereToFindId": "Where do I find my Steam ID?"
   }
 }

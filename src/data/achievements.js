@@ -719,8 +719,8 @@ export const initialAchievements = [
     iconType: 'map'
   },
   {
-    id: 'poppycock',
-    name: 'Balela! (Poppycock)',
+    id: 'poppydock',
+    name: 'Portolices! (Poppydock)',
     description: 'Como a Grã-Bretanha, vença a Guerra do Ópio contra a China e exija um porto do tratado.',
     difficulty: 'Fácil',
     country: 'Grã-Bretanha',

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { RefreshCw, CheckCircle2, AlertCircle, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function SteamSync({ dict, onSyncSuccess }) {
   const [steamId, setSteamId] = useState(''); 
@@ -96,7 +97,7 @@ export default function SteamSync({ dict, onSyncSuccess }) {
     <div className="flex items-center gap-2 relative">
       {steamProfile ? (
           <div className="flex items-center gap-3 bg-slate-900 border border-slate-700 py-1.5 px-3 rounded-lg shadow-inner">
-              <img src={steamProfile.avatar} alt="Avatar" className="w-6 h-6 rounded-md" />
+              <Image src={steamProfile.avatar} alt="Avatar" width={24} height={24} className="w-6 h-6 rounded-md" unoptimized={false} />
               <div className="flex flex-col">
                   <span className="text-xs font-semibold text-slate-200 leading-tight">
                       {steamProfile.personaname} {getFlagEmoji(steamProfile.loccountrycode)}
@@ -107,13 +108,18 @@ export default function SteamSync({ dict, onSyncSuccess }) {
               </button>
           </div>
       ) : (
-          <input
-            type="text"
-            placeholder={dict.steamSync.placeholder}
-            value={steamId}
-            onChange={(e) => setSteamId(e.target.value)}
-            className="bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2 placeholder-slate-500 shadow-inner w-56"
-          />
+          <div className="flex flex-col gap-1">
+              <input
+                type="text"
+                placeholder={dict.steamSync.placeholder}
+                value={steamId}
+                onChange={(e) => setSteamId(e.target.value)}
+                className="bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block p-2 placeholder-slate-500 shadow-inner w-56"
+              />
+              <a href="https://store.steampowered.com/account/" target="_blank" rel="noreferrer" className="text-[10px] text-slate-400 hover:text-amber-400 ml-1 transition-colors">
+                  {dict.steamSync.whereToFindId}
+              </a>
+          </div>
       )}
       
       <button
