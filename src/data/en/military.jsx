@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flag, Tent, Crosshair, Skull } from 'lucide-react';
+import { Flag, Tent, Ship, Crosshair, Skull } from 'lucide-react';
 
 export const militaryNodes = [
   {
@@ -27,12 +27,24 @@ export const militaryNodes = [
     themeBorder: 'border-green-500/30'
   },
   {
+    id: 'naval_rework',
+    title: '3. Navy: Crews and Missions (since 1.13)',
+    icon: <Ship className="w-6 h-6 text-cyan-400" />,
+    description: 'Since "The Great Wave", ships are individual objects with their own crews. Fleets run Missions instead of a single admiral order.',
+    details: 'The navy was rebuilt from scratch in the 1.13 "Matcha" / "The Great Wave" update. Ships are now individual objects you construct, lose, and repair — no longer abstract manpower packages. Every fleet needs real crews, supplied by a new building, the Naval Administration, which acts as a pool of sailors for your country. The Ship Designer lets you customize armor, armament, propulsion, and supply capacity per ship type. The old "pick a node and give an order" system was replaced by a fleet Mission system: Project Power, Interception, Protect Supply, Attack Supply, Blockade, Port Bombardment, Hunt Pirates, and Privateering. A single fleet can cover several nodes at once (at reduced efficiency, up to a limit tied to the admiral\'s rank), and combat depends on detection versus visibility — fleets can search for, find, and intercept each other in transit. Straits and naval fortifications now define a minimum strength the attacker must overcome before attempting an amphibious invasion.',
+    inputs: ['Shipyards and Naval Base levels', 'Naval Administration (crew)', 'Ship Designer (armor, armament, propulsion, supply)'],
+    outputs: ['Fleets with detection/visibility', 'Active fleet Missions', 'Flagship captaincies and combat prestige'],
+    themeColor: 'text-cyan-400',
+    themeBg: 'bg-cyan-500/20',
+    themeBorder: 'border-cyan-500/30'
+  },
+  {
     id: 'formations_battles',
-    title: '3. Formations & Battles',
+    title: '4. Formations & Battles',
     icon: <Crosshair className="w-6 h-6 text-red-400" />,
-    description: 'Battalions grouped into Armies are commanded by Generals to resolve stalemates on the Frontlines.',
-    details: 'Barracks maintain "Battalions and Flotillas", which are then grouped into "Formations: Armies and Fleets". "Generals and Admirals" command these formations and receive orders to advance or defend on "Frontlines and Naval Nodes". Territorial stalemates result in Battles. Offensive and defensive power in battle is defined by Military Technology combined with tactics and bonuses provided by Commanders.',
-    inputs: ['Battalions and Flotillas', 'Generals and Admirals', 'Frontlines / Naval Nodes'],
+    description: 'Battalions and fleets grouped into Formations with a single Commander resolve stalemates on Frontlines and Naval Nodes.',
+    details: 'Barracks maintain "Battalions", and the Naval Administration maintains fleet crews; both are grouped into "Formations: Armies and Fleets". Since the 1.13 rework, each Formation has a single Commander (General or Admiral), cutting down the micromanagement of dozens of leaders, and the command limit was reworked to reflect this. Commanders receive orders to advance or defend on "Frontlines and Naval Nodes". Territorial stalemates result in Battles. Offensive and defensive power in battle is defined by Military Technology combined with tactics, Commander bonuses, and — decisively — supply along the logistics lines.',
+    inputs: ['Battalions and Flotillas', 'Single Commander per Formation', 'Frontlines / Naval Nodes'],
     outputs: ['Battle Resolution', 'Territorial Occupation (Victory)', 'Dead and Wounded'],
     themeColor: 'text-red-400',
     themeBg: 'bg-red-500/20',
@@ -40,7 +52,7 @@ export const militaryNodes = [
   },
   {
     id: 'war_exhaustion',
-    title: '4. War Exhaustion & Resolution',
+    title: '5. War Exhaustion & Resolution',
     icon: <Skull className="w-6 h-6 text-purple-400" />,
     description: 'Casualties and Occupations punish War Exhaustion until forcing Capitulation. Creates a strong Feedback Loop.',
     details: 'Battles leave two great scars: "Territorial Occupation" by the victor and a substantial number of "Dead, Wounded and Dependents" on both sides. These factors punish your morale, increasing the "War Exhaustion" penalty weekly. When Exhaustion reaches its limit (100%), the country is forced to Capitulate or accept a Peace Treaty. Furthermore, casualties trigger a dangerous Feedback Loop: they reduce the Active Population of your economy and the mourning increases the number of Radicals in the country.',

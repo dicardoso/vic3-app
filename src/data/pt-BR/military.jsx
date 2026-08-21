@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flag, Tent, Crosshair, Skull } from 'lucide-react';
+import { Flag, Tent, Ship, Crosshair, Skull } from 'lucide-react';
 
 export const militaryNodes = [
   {
@@ -27,12 +27,24 @@ export const militaryNodes = [
     themeBorder: 'border-green-500/30'
   },
   {
+    id: 'naval_rework',
+    title: '3. Marinha: Tripulação e Missões (desde o 1.13)',
+    icon: <Ship className="w-6 h-6 text-cyan-400" />,
+    description: 'Desde "The Great Wave", navios são objetos individuais com tripulação própria. Frotas executam Missões, não mais uma única ordem por almirante.',
+    details: 'A marinha foi refeita do zero na atualização 1.13 "Matcha" / "The Great Wave". Navios agora são objetos individuais que você constrói, perde e repara — não mais pacotes abstratos de mão de obra. Toda frota precisa de tripulação de verdade, fornecida por um novo prédio, a Administração Naval, que funciona como um reservatório de marinheiros. O Ship Designer permite customizar blindagem, armamento, propulsão e capacidade de suprimento por tipo de navio. O antigo sistema de "escolher um nó e dar uma ordem" foi substituído por um sistema de Missões de frota: Projetar Poder, Interceptação, Proteger Suprimento, Atacar Suprimento, Bloqueio, Bombardeio de Porto, Caçar Piratas e Corso. Uma única frota pode cobrir vários nós ao mesmo tempo (com eficiência reduzida, até um limite ligado à patente do almirante), e o combate depende de detecção contra visibilidade — frotas podem se procurar, se encontrar e ser interceptadas em trânsito. Estreitos e fortificações navais agora definem uma força mínima que o atacante precisa superar antes de tentar uma invasão anfíbia.',
+    inputs: ['Estaleiros e níveis de Base Naval', 'Administração Naval (tripulação)', 'Ship Designer (blindagem, armamento, propulsão, suprimento)'],
+    outputs: ['Frotas com detecção/visibilidade', 'Missões de frota ativas', 'Capitanias e prestígio de combate (Flagship)'],
+    themeColor: 'text-cyan-400',
+    themeBg: 'bg-cyan-500/20',
+    themeBorder: 'border-cyan-500/30'
+  },
+  {
     id: 'formations_battles',
-    title: '3. Formações e Batalhas',
+    title: '4. Formações e Batalhas',
     icon: <Crosshair className="w-6 h-6 text-red-400" />,
-    description: 'Batalhões agrupados em Exércitos são comandados por Generais para resolver impasses nas Frentes de Batalha.',
-    details: 'Os Quartéis mantêm os "Batalhões e Flotilhas", que são então agrupados em "Formações: Exércitos e Frotas". Os "Generais e Almirantes" comandam estas formações e recebem ordens para avançar ou defender nas "Frentes de Batalha e Nodos Navais". O impasse territorial resulta em Batalhas. O poder ofensivo e defensivo da batalha é definido pela Tecnologia Militar combinada com as táticas e os bônus fornecidos pelos Comandantes.',
-    inputs: ['Batalhões e Flotilhas', 'Generais e Almirantes', 'Frentes de Batalha / Nodos Navais'],
+    description: 'Batalhões e frotas agrupados em Formações com um único Comandante resolvem impasses nas Frentes de Batalha e Nós Navais.',
+    details: 'Os Quartéis mantêm os "Batalhões", e a Administração Naval mantém as tripulações das frotas; ambos são agrupados em "Formações: Exércitos e Frotas". Desde o rework de 1.13, cada Formação tem um único Comandante (General ou Almirante), reduzindo o microgerenciamento de dezenas de líderes, e o limite de comando (command limit) foi reformulado para refletir isso. Os Comandantes recebem ordens para avançar ou defender nas "Frentes de Batalha e Nós Navais". O impasse territorial resulta em Batalhas. O poder ofensivo e defensivo da batalha é definido pela Tecnologia Militar combinada com as táticas, os bônus dos Comandantes e — decisivamente — o suprimento das linhas de logística.',
+    inputs: ['Batalhões e Flotilhas', 'Comandante único por Formação', 'Frentes de Batalha / Nós Navais'],
     outputs: ['Resolução de Batalhas', 'Ocupação de Território (Vitória)', 'Mortos e Feridos'],
     themeColor: 'text-red-400',
     themeBg: 'bg-red-500/20',
@@ -40,7 +52,7 @@ export const militaryNodes = [
   },
   {
     id: 'war_exhaustion',
-    title: '4. Exaustão de Guerra e Resolução',
+    title: '5. Exaustão de Guerra e Resolução',
     icon: <Skull className="w-6 h-6 text-purple-400" />,
     description: 'Baixas e Ocupações punem a Exaustão de Guerra até forçar a Capitulação. Cria um forte Feedback Loop.',
     details: 'As batalhas deixam duas grandes cicatrizes: "Ocupação de Território" pelo vencedor e um número substancial de "Mortos, Feridos e Dependentes" de ambos os lados. Estes fatores punem a sua moral, aumentando a penalidade de "Exaustão de Guerra" semanalmente. Quando a Exaustão atinge seu limite (100%), o país é forçado à Capitulação ou a aceitar um Tratado de Paz. Além disso, as baixas ativam um Feedback Loop perigoso: reduzem a População Ativa da sua economia e o luto aumenta o número de Radicais no país.',

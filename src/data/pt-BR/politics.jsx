@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Landmark, FileText, Gavel } from 'lucide-react';
+import { Users, Landmark, FileText, Megaphone, Gavel } from 'lucide-react';
 
 export const politicsNodes = [
   {
@@ -39,11 +39,23 @@ export const politicsNodes = [
     themeBorder: 'border-blue-500/30'
   },
   {
+    id: 'movements_radicals',
+    title: '4. Movimentos e Radicalismo',
+    icon: <Megaphone className="w-6 h-6 text-rose-400" />,
+    description: 'Padrão de vida caindo cria Radicais; Radicais alimentam Movimentos, que podem virar revolução — ou servir de apoio para aprovar leis.',
+    details: 'Um Movimento Político se forma em torno de uma lei específica (para instaurar, reverter ou preservar) e acumula Participação e Radicalismo. Ele nasce da queda de Padrão de Vida dos POPs, que os transforma em Radicais (o oposto sustentado gera Leais). Se um movimento cresce sem ser atendido, torna-se revolucionário e o Relógio da Revolução começa a correr. A Legitimidade do governo (0–100) modula tudo isso: abaixo de 25 nenhuma lei avança, exceto as endossadas por um movimento ativo; entre 25 e 49 a aprovação é cerca de 50% mais lenta; acima de 90, cerca de 25% mais rápida. Isso cria a mecânica que quase nenhum tutorial explica: um movimento não-passivo que endossa uma lei serve como base de apoio para aprová-la, inclusive com o governo ilegítimo — usando a rua como uma terceira casa legislativa.',
+    inputs: ['Radicais e Legalistas (do processo de aprovação)', 'Padrão de Vida em queda ou em alta', 'Legitimidade do governo'],
+    outputs: ['Movimentos Políticos (passivos ou ativos)', 'Relógio da Revolução', 'Apoio popular para aprovar leis mesmo com governo ilegítimo'],
+    themeColor: 'text-rose-400',
+    themeBg: 'bg-rose-500/20',
+    themeBorder: 'border-rose-500/30'
+  },
+  {
     id: 'laws_institutions',
-    title: '4. Leis Atuais e Feedback Loop',
+    title: '5. Leis Atuais e Feedback Loop',
     icon: <Gavel className="w-6 h-6 text-emerald-400" />,
     description: 'Leis aprovadas afetam Regras de Votação, Instituições e criam um ciclo que altera a sociedade.',
-    details: 'Quando uma lei sobrevive às fases de aprovação, ela se torna parte das "Leis Atuais". Estas leis desbloqueiam ou limitam as "Instituições" de estado (Escolas, Hospitais, Polícia) e também determinam quanta Autoridade e Burocracia você gera ou consome. O ponto mais importante é o Feedback Loop: as Leis Atuais mudam a Estrutura Econômica e Social (ex: fim da escravidão, fim dos subsídios), o que altera diretamente a Riqueza e as Profissões dos POPs na base da pirâmide, reiniciando o ciclo político sob novas regras.',
+    details: 'Quando uma lei sobrevive às fases de aprovação, ela se torna parte das "Leis Atuais". Estas leis desbloqueiam ou limitam as "Instituições" de estado (Escolas, Hospitais, Polícia) e também determinam quanta Autoridade e Burocracia você gera ou consome. Desde o patch 1.13.9, a maioria dos modificadores negativos fixos de Autoridade e Burocracia (como Concessões Políticas) passou a ser tratada como um custo, não mais como uma penalidade direta — o que muda como vale a pena calcular a folga desses dois recursos. O ponto mais importante continua sendo o Feedback Loop: as Leis Atuais mudam a Estrutura Econômica e Social (ex: fim da escravidão, fim dos subsídios), o que altera diretamente a Riqueza e as Profissões dos POPs na base da pirâmide, reiniciando o ciclo político sob novas regras.',
     inputs: ['Lei Aprovada (Fases concluídas)'],
     outputs: ['Instituições', 'Geração/Consumo de Autoridade e Burocracia', 'Mudança na Estrutura Econômica (Feedback Loop para POPs)'],
     themeColor: 'text-emerald-400',

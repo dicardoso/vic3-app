@@ -43,6 +43,51 @@ export const macroConcepts = [
     proTip: 'Build Government Administrations in provinces with tax deficits, but beware: the Paper and wages these administrations consume often cost more than the tax recovered in the early-game. Use new social technologies and the right laws first!',
     colorTheme: 'text-red-400',
     bgColorTheme: 'bg-red-500/20'
+  },
+  {
+    id: 'world_market',
+    title: 'World Market and Trade Centers',
+    iconType: 'map',
+    description: 'Since patch 1.9, a global pricing layer sits above national markets. Trade Centers negotiate with it on their own.',
+    extendedDetails: 'The World Market connects your national market to the rest of the globe. Trade Centers (built via the construction sector, and financeable through the Investment Pool) negotiate automatically with that global market, exploiting price differences and Trade Advantage to profit — you do not draw trade routes by hand. This makes domestic prices sensitive to shortages or surpluses abroad, and turns tariffs into a real economic policy lever: they protect infant industry at the cost of raising prices for POPs, or lower input costs at the cost of exposing local producers.',
+    lawsImpact: [
+      'Free Trade: no tariffs, activates Trade Advantage — the most underused bonus in the game for most players.',
+      'Protectionism: only pays off if your strategy is to collect tariff revenue (e.g. very populous countries).',
+      'Bilateral treaties and subjects (colonies/protectorates) usually join your own market, extending the reach of your Trade Centers.'
+    ],
+    proTip: 'Importing a cheap input to process internally is not weakness, it is the model that historically enriches nations (it is what Britain does). The real exception is military goods (ammunition, artillery, small arms, fuel): depending on imports for those means whoever blockades you at sea decides whether you can fight.',
+    colorTheme: 'text-blue-400',
+    bgColorTheme: 'bg-blue-500/20'
+  },
+  {
+    id: 'market_access',
+    title: 'Market Access and Infrastructure',
+    iconType: 'settings',
+    description: 'Railways and ports define how much of a state\'s output actually reaches the national market. It is the game\'s most silent leak.',
+    extendedDetails: 'Every state has an Infrastructure supply (railways, ports) and consumption (every heavy building consumes some). When consumption exceeds supply, that state\'s Market Access drops proportionally: part of its output simply never reaches the national market, and part of its inputs never reach its buildings. Production numbers look correct, but the result never shows up — and a state\'s local price for an input can sit well above the national average even without a single local factory, just from neighboring buildings\' demand.',
+    lawsImpact: [
+      'More advanced railway methods increase Transport output (consumed by other industries) but can reduce delivered infrastructure if you do not build extra levels alongside them.',
+      'Ports deliver less infrastructure but generate Convoys, which sustain maritime trade and armies/fleets abroad.',
+      'Canals (Suez, Panama) are decade-long projects that reorganize entire trade routes.'
+    ],
+    proTip: 'A high local price has two distinct causes with different fixes: local demand without local production (build the input there) or market access below 100% (build a railway — producing more in the state does not fix that). Open the infrastructure map mode every decade to check which case you are in.',
+    colorTheme: 'text-teal-400',
+    bgColorTheme: 'bg-teal-500/20'
+  },
+  {
+    id: 'debt_leverage',
+    title: 'Debt, Interest Rate and Leverage',
+    iconType: 'coins',
+    description: 'Debt is not a sin, it is leverage — but only within a credit ceiling and when it funds productive capacity.',
+    extendedDetails: 'GDP growth of 5% to 8% a year is achievable for most of a playthrough. If your country\'s interest rate sits below that, running a deficit can pay off, because future growth covers the debt on its own. But the rule of thumb "low interest = safe to owe" is incomplete in two ways: there is a credit ceiling (crossing it triggers bankruptcy, which destroys prestige, radicalizes the country, and halts construction), and where the money goes matters — debt funding the construction sector and its input chain generates the growth that pays for itself; the same debt funding permanent subsidies or a peacetime army generates no growth at all.',
+    lawsImpact: [
+      'Financial technologies (Monetary Standard/Banking Services, Central Bank, Multiple Funds): each cuts interest by roughly 2%, and the effects stack.',
+      'Laissez-Faire: the single largest interest cut (up to -25%), but it is an end-game law.',
+      'High prestige lowers the cost of international credit; a respected country borrows more cheaply.'
+    ],
+    proTip: 'Only run a deficit when all three conditions hold: low interest, the money is going to productive capacity, and you are far from the credit ceiling. Failing any one of them turns leverage into a debt spiral.',
+    colorTheme: 'text-purple-400',
+    bgColorTheme: 'bg-purple-500/20'
   }
 ];
 
@@ -86,6 +131,16 @@ export const productionChains = [
     pmEvolution: 'Luxury goods are not isolated factories, they are secondary production methods in normal factories. Activating the "Luxury Furniture" PM in the furniture factory will consume Hardwood to produce expensive items alongside the normal ones.',
     primaryUses: 'Exclusive consumption of rich Pops (Aristocrats and Capitalists from SoL 15+). Having them cheap and abundant increases the overall standard of living and generates a massive tax base under Graduated Taxation laws.',
     iconType: 'star'
+  },
+  {
+    output: 'Paper',
+    category: 'Administrative Input',
+    tier: 'bg-yellow-900',
+    inputs: ['Wood', 'Services (advanced methods)'],
+    description: 'The hidden cost behind your entire bureaucracy.',
+    pmEvolution: 'Starts in mills that only consume Wood. More advanced chemical pulping methods raise output significantly but start requiring Services as a secondary input. In very populous countries, Paper consumption scales with the number of Government Administrations and Universities built.',
+    primaryUses: 'Consumed by Government Administration (the source of Bureaucracy) and by Universities. Expensive Paper raises the cost of your entire bureaucracy at once — building local paper industry is one of the most effective ways to unlock populous countries like China, India, or Russia, stuck in the "more people → more administration → pricier paper → more administration" loop.',
+    iconType: 'book'
   },
   {
     output: 'Artillery & Tanks',

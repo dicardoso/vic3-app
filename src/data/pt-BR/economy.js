@@ -43,6 +43,51 @@ export const macroConcepts = [
     proTip: 'Construa Administrações Governamentais nas províncias com déficit de impostos, mas atenção: o papel (Paper) e os salários que essas administrações consomem muitas vezes custam mais do que o imposto recuperado no early-game. Use novas tecnologias sociais e as leis corretas primeiro!',
     colorTheme: 'text-red-400',
     bgColorTheme: 'bg-red-500/20'
+  },
+  {
+    id: 'world_market',
+    title: 'Mercado Mundial e Centros de Comércio',
+    iconType: 'map',
+    description: 'Desde o patch 1.9, uma camada de preços global fica acima dos mercados nacionais. Centros de Comércio negociam com ela sozinhos.',
+    extendedDetails: 'O Mercado Mundial conecta o seu mercado nacional ao resto do globo. Os Centros de Comércio (construídos pelo setor de construção e financiáveis via Fundo de Investimento) negociam automaticamente com esse mercado global, explorando diferenças de preço e Vantagem Comercial para lucrar — você não desenha rotas de comércio manualmente. Isso torna preços domésticos sensíveis a escassez ou excesso lá fora, e transforma tarifas em uma ferramenta real de política econômica: protegem indústria nascente ao custo de encarecer bens para os POPs, ou baixam insumos ao custo de expor produtores locais.',
+    lawsImpact: [
+      'Livre Mercado: sem tarifas, ativa a Vantagem Comercial — o bônus mais subutilizado do jogo pela maioria dos jogadores.',
+      'Protecionismo: só compensa se a estratégia for arrecadar em cima de tarifa (ex.: países muito populosos).',
+      'Tratados bilaterais e sujeitos (colônias/protetorados) normalmente entram no seu próprio mercado, ampliando o alcance dos seus Centros de Comércio.'
+    ],
+    proTip: 'Importar insumo barato para transformar internamente não é fraqueza, é o modelo que historicamente enriquece (é o que a Grã-Bretanha faz). A exceção real são bens militares (munição, artilharia, armas, combustível): depender de importação neles significa que quem te bloquear no mar decide se você luta.',
+    colorTheme: 'text-blue-400',
+    bgColorTheme: 'bg-blue-500/20'
+  },
+  {
+    id: 'market_access',
+    title: 'Acesso ao Mercado e Infraestrutura',
+    iconType: 'settings',
+    description: 'Ferrovias e portos definem quanto da produção de um estado realmente chega ao mercado nacional. É o vazamento mais silencioso do jogo.',
+    extendedDetails: 'Cada estado tem oferta de Infraestrutura (ferrovias, portos) e consumo (todo prédio pesado consome). Quando o consumo ultrapassa a oferta, o Acesso ao Mercado daquele estado cai proporcionalmente: parte da produção simplesmente não chega ao mercado nacional, e parte dos insumos não chega aos prédios. Os números de produção parecem certos, mas o resultado não aparece — e o preço local de um insumo pode ficar bem acima da média nacional mesmo sem nenhuma fábrica local, só por causa da demanda de prédios vizinhos.',
+    lawsImpact: [
+      'Métodos de ferrovia mais avançados aumentam a produção de Transporte (consumido por outras indústrias), mas podem reduzir a infraestrutura entregue se você não construir níveis adicionais junto.',
+      'Portos entregam menos infraestrutura, mas geram Comboios, que sustentam comércio marítimo e exércitos/frotas no exterior.',
+      'Canais (Suez, Panamá) são projetos de década que reorganizam rotas comerciais inteiras.'
+    ],
+    proTip: 'Preço local alto tem duas causas distintas e correções diferentes: demanda local sem produção local (construa o insumo ali) ou acesso ao mercado abaixo de 100% (construa ferrovia — produzir mais no estado não resolve isso). Abra o modo de mapa de infraestrutura a cada década para checar qual é o seu caso.',
+    colorTheme: 'text-teal-400',
+    bgColorTheme: 'bg-teal-500/20'
+  },
+  {
+    id: 'debt_leverage',
+    title: 'Dívida, Juros e Alavancagem',
+    iconType: 'coins',
+    description: 'Dívida não é pecado, é alavancagem — mas só compensa dentro de um teto de crédito e quando financia capacidade produtiva.',
+    extendedDetails: 'Um PIB crescendo 5% a 8% ao ano é factível na maior parte de uma partida. Se a taxa de juros do seu país estiver abaixo disso, ficar negativo pode compensar, porque o crescimento futuro paga a dívida sozinho. Mas a régua "juros baixos = pode dever" é incompleta em dois pontos: existe um teto de crédito (ultrapassá-lo gera bancarrota, que destrói prestígio, radicaliza o país e trava construção), e importa para onde vai o dinheiro — dívida financiando setor de obras e cadeia de insumos gera o crescimento que paga a conta; a mesma dívida financiando subsídio permanente ou exército de tempo de paz não gera crescimento nenhum.',
+    lawsImpact: [
+      'Tecnologias financeiras (Padrão Monetário/Serviços Bancários, Banco Central, Fundos Múltiplos): cada uma reduz os juros em cerca de 2%, e os efeitos se somam.',
+      'Laissez-Faire: o maior corte isolado de juros (até -25%), mas é uma lei de fim de jogo.',
+      'Prestígio alto reduz o custo do crédito internacional; um país respeitado toma dinheiro mais barato.'
+    ],
+    proTip: 'Fique negativo apenas quando as três condições se somam: juros baixos, dinheiro indo para capacidade produtiva, e você longe do teto de crédito. Falhar em qualquer uma delas transforma alavancagem em espiral de dívida.',
+    colorTheme: 'text-purple-400',
+    bgColorTheme: 'bg-purple-500/20'
   }
 ];
 
@@ -86,6 +131,16 @@ export const productionChains = [
     pmEvolution: 'Bens de luxo não são fábricas isoladas, são métodos de produção secundários nas fábricas normais. Ao ativar o PM de "Móveis de Luxo" na fábrica de móveis, ela consumirá Madeira de Lei para produzir itens caros ao lado dos normais.',
     primaryUses: 'Consumo exclusivo das Pops Ricas (Aristocratas e Capitalistas a partir do SoL 15). Tê-los baratos e abundantes aumenta o padrão de vida global e gera uma base tributária gigantesca sob leis de Imposto Graduado.',
     iconType: 'star'
+  },
+  {
+    output: 'Papel',
+    category: 'Insumo Administrativo',
+    tier: 'bg-yellow-900',
+    inputs: ['Madeira', 'Serviços (métodos avançados)'],
+    description: 'O custo escondido de toda a burocracia do seu país.',
+    pmEvolution: 'Começa em moinhos que só consomem Madeira. Métodos de polpa química mais avançados aumentam bastante o rendimento, mas passam a exigir Serviços como insumo secundário. Em países muito populosos, o consumo de Papel escala com o número de Administrações Governamentais e Universidades construídas.',
+    primaryUses: 'Consumido por Administração Governamental (a fonte de Burocracia) e por Universidades. Papel caro encarece toda a sua burocracia ao mesmo tempo — construir indústria de papel local é uma das formas mais eficazes de destravar países populosos como China, Índia ou Rússia, presos no loop de "mais gente → mais administração → mais papel caro → mais administração".',
+    iconType: 'book'
   },
   {
     output: 'Artilharia & Tanques',
