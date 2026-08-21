@@ -12,6 +12,15 @@ export function getDifficultyKey(internalDifficulty) {
     return difficultyKeyMap[internalDifficulty] || null;
 }
 
+export function formatUnlockDate(timestampMs, locale = 'pt-BR') {
+    if (!timestampMs) return null;
+    return new Date(timestampMs).toLocaleDateString(locale, {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric'
+    });
+}
+
 export function getDifficultyColor(diff) {
     // Accept either internal keys or translated values
     // First check direct match, then check if it matches any known pattern

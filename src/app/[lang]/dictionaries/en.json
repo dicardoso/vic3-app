@@ -84,7 +84,8 @@
     "officialDescription": "Official Description",
     "startRequirements": "Start Requirements",
     "victoryConditions": "Victory Conditions",
-    "strategyTip": "Quick Strategy Tip"
+    "strategyTip": "Quick Strategy Tip",
+    "unlockedOn": "Unlocked on"
   },
   "guides": {
     "title": "Core Nations & Strategies",

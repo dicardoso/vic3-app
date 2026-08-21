@@ -64,7 +64,7 @@ export default function SteamSync({ dict, onSyncSuccess }) {
             id = 'federation_of_the_andes';
           }
 
-          return id;
+          return { id, unlockedAt: ach.unlocktime ? ach.unlocktime * 1000 : null };
         });
 
       if (data.profile) {
