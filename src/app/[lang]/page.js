@@ -47,32 +47,41 @@ export default function Vic3AchievementTracker() {
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
-                const merged = initialAchievements.map(ach => ({
-                    ...ach,
-                    completed: parsed[ach.id] || false
-                }));
+                const merged = initialAchievements.map(ach => {
+                    const entry = parsed[ach.id];
+                    if (entry && typeof entry === 'object') {
+                        return { ...ach, completed: !!entry.completed, unlockedAt: entry.unlockedAt || null };
+                    }
+                    return { ...ach, completed: !!entry, unlockedAt: null };
+                });
                 setAchievements(merged);
             } catch {
-                setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false })));
+                setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false, unlockedAt: null })));
             }
         } else {
-            setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false })));
+            setAchievements(initialAchievements.map(ach => ({ ...ach, completed: false, unlockedAt: null })));
         }
     }, [initialAchievements]);
 
-    const handleSteamSyncSuccess = (achievedIds) => {
+    const handleSteamSyncSuccess = (achievedList) => {
+        const achievedMap = new Map(achievedList.map(a => [a.id, a.unlockedAt]));
+
         setAchievements(prev => {
-            const updated = prev.map(ach => ({
-                ...ach,
-                completed: achievedIds.includes(ach.id)
-            }));
+            const updated = prev.map(ach => {
+                const isAchieved = achievedMap.has(ach.id);
+                return {
+                    ...ach,
+                    completed: isAchieved,
+                    unlockedAt: isAchieved ? achievedMap.get(ach.id) : null
+                };
+            });
 
             const saveState = updated.reduce((acc, ach) => {
-                if (ach.completed) acc[ach.id] = true;
+                if (ach.completed) acc[ach.id] = { completed: true, unlockedAt: ach.unlockedAt };
                 return acc;
             }, {});
             localStorage.setItem('vic3_achievements_v2', JSON.stringify(saveState));
-            
+
             return updated;
         });
     };
@@ -81,12 +90,18 @@ export default function Vic3AchievementTracker() {
         if (event) event.stopPropagation();
 
         setAchievements(prev => {
-            const updated = prev.map(ach =>
-                ach.id === id ? { ...ach, completed: !ach.completed } : ach
-            );
+            const updated = prev.map(ach => {
+                if (ach.id !== id) return ach;
+                const nowCompleted = !ach.completed;
+                return {
+                    ...ach,
+                    completed: nowCompleted,
+                    unlockedAt: nowCompleted ? ach.unlockedAt : null
+                };
+            });
 
             const saveState = updated.reduce((acc, ach) => {
-                if (ach.completed) acc[ach.id] = true;
+                if (ach.completed) acc[ach.id] = { completed: true, unlockedAt: ach.unlockedAt || null };
                 return acc;
             }, {});
             localStorage.setItem('vic3_achievements_v2', JSON.stringify(saveState));

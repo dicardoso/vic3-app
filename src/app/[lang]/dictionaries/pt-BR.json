@@ -84,7 +84,8 @@
     "officialDescription": "Descrição Oficial",
     "startRequirements": "Requisitos de Início",
     "victoryConditions": "Condições de Vitória",
-    "strategyTip": "Dica Rápida de Estratégia"
+    "strategyTip": "Dica Rápida de Estratégia",
+    "unlockedOn": "Desbloqueada em"
   },
   "guides": {
     "title": "Nações Centrais e Estratégias",

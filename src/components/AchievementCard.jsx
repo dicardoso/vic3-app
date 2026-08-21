@@ -1,10 +1,11 @@
-import { CheckCircle2, Circle, Map } from 'lucide-react';
+import { CheckCircle2, Circle, Map, Calendar } from 'lucide-react';
 import IconMapper from './IconMapper';
-import { getDifficultyColor } from '@/utils/helpers';
+import { getDifficultyColor, formatUnlockDate } from '@/utils/helpers';
 import { useDictionary } from './DictionaryContext';
 
 export default function AchievementCard({ ach, onClick, onToggle }) {
-    const { dict } = useDictionary();
+    const { dict, lang } = useDictionary();
+    const unlockDate = ach.completed ? formatUnlockDate(ach.unlockedAt, lang === 'en' ? 'en-US' : 'pt-BR') : null;
 
     return (
         <div
@@ -46,6 +47,11 @@ export default function AchievementCard({ ach, onClick, onToggle }) {
                     <span className="text-xs px-2.5 py-1 rounded-md bg-slate-700/50 text-slate-300 border border-slate-600/50 flex items-center gap-1">
                         <Map className="w-3 h-3" /> {ach.country}
                     </span>
+                    {unlockDate && (
+                        <span className="text-xs px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 border border-green-500/20 flex items-center gap-1">
+                            <Calendar className="w-3 h-3" /> {unlockDate}
+                        </span>
+                    )}
                 </div>
             </div>
         </div>

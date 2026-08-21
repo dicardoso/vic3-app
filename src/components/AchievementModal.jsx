@@ -1,12 +1,16 @@
-import { CheckCircle2, Map, Target, BookOpen, X } from 'lucide-react';
+import { CheckCircle2, Map, Target, BookOpen, Calendar, X } from 'lucide-react';
 import IconMapper from './IconMapper';
-import { getDifficultyColor } from '@/utils/helpers';
+import { getDifficultyColor, formatUnlockDate } from '@/utils/helpers';
 import { useDictionary } from './DictionaryContext';
 
 export default function AchievementModal({ selectedAchievement, onClose, onToggle }) {
-    const { dict } = useDictionary();
+    const { dict, lang } = useDictionary();
 
     if (!selectedAchievement) return null;
+
+    const unlockDate = selectedAchievement.completed
+        ? formatUnlockDate(selectedAchievement.unlockedAt, lang === 'en' ? 'en-US' : 'pt-BR')
+        : null;
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm" onClick={onClose}>
@@ -28,6 +32,11 @@ export default function AchievementModal({ selectedAchievement, onClose, onToggl
                                 <span className="text-xs px-2 py-0.5 rounded border border-slate-600 bg-slate-800 text-slate-300">
                                     {selectedAchievement.objectiveType}
                                 </span>
+                                {unlockDate && (
+                                    <span className="text-xs px-2 py-0.5 rounded border border-green-600/40 bg-green-500/10 text-green-400 flex items-center gap-1">
+                                        <Calendar className="w-3 h-3" /> {dict.achievements.unlockedOn} {unlockDate}
+                                    </span>
+                                )}
                             </div>
                         </div>
                     </div>
